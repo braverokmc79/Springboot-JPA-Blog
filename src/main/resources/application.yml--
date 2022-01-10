@@ -1,0 +1,56 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        default_batch_fetch_size: '1000'
+        format_sql: 'true'
+        use_sql_comments: 'true'
+        show_sql: 'true'
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+  thymeleaf:
+    cache: 'false'
+  data:
+    web:
+      sort:
+        sort-parameter: sort
+      pageable:
+        qualifier-delimiter: _
+        size-parameter: size
+        one-indexed-parameters: 'true'
+        max-page-size: '2000'
+        page-parameter: page
+        default-page-size: '20'
+        prefix: ''
+  devtools:
+    restart:
+      enabled: 'true'
+    livereload:
+      enabled: 'true'
+  servlet:
+    multipart:
+      maxRequestSize: 100MB
+      maxFileSize: 20MB
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    password: '1234'
+    username: springbootblog
+    url: jdbc:log4jdbc:mysql://localhost:3306/springbootblog?serverTimezone=UTC
+  output:
+    ansi:
+      enabled: always
+itemImgLocation: E:/IntelliJ IDEA/upload/item
+uploadPath: file:///E:/IntelliJ IDEA/upload/
+server:
+  port: '80'
+logging:
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level)
+      %msg - at %C.%M\(%F:%L\)%n'
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
