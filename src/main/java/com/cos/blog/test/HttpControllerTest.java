@@ -17,9 +17,10 @@ public class HttpControllerTest {
 
     //http://localhost:8080/http/post
     @PostMapping(value = "/http/post")
-    public String postTest(){
-        return "post 요청";
+    public String postTest(@RequestBody  Member member){
+        return member.toString();
     }
+
 
     //http://localhost:8080/http/put
     @PutMapping(value = "/http/put")
