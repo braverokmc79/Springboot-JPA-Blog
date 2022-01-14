@@ -1,12 +1,10 @@
 package com.cos.blog.model;
 
-import com.cos.blog.constant.Role;
+import com.cos.blog.constant.RoleType;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 
@@ -16,6 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder //빌더패턴
 @Entity //User 클래스가 MySQL 에 테이블이 생성이 된다.
+//@DynamicInsert //insert 시에 널인 필드를 제외 시켜 준다.디폴트값을 선언한 것은 null 값이 들어와도 자동으로 등록처리해 준다.
 public class User {
 
     @Id//Primary key
@@ -32,9 +31,11 @@ public class User {
     @Column(nullable = false, length = 50)
     private String email; //이메일
 
+
+    //@ColumnDefault("'USER'")
+    //DB는 RoleType 이라는 것이 없다. 따라서 Enum 이 String 이라는 것을 알려준다.
     @Enumerated(EnumType.STRING)
-   // @ColumnDefault("'USER'")
-    private Role role;// Enum을 쓰는게 좋다.
+    private RoleType role;// Enum을 쓰는게 좋다.
 
     @CreationTimestamp //시간이 자동 입력
     private LocalDateTime createDate; //등록일
