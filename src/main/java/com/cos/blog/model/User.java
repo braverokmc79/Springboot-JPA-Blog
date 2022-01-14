@@ -1,6 +1,10 @@
 package com.cos.blog.model;
 
 import com.cos.blog.constant.Role;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -8,6 +12,11 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder //빌더패턴
 @Entity //User 클래스가 MySQL 에 테이블이 생성이 된다.
 public class User {
 

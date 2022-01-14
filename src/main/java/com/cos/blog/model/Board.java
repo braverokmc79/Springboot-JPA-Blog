@@ -1,11 +1,20 @@
 package com.cos.blog.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity //User 클래스가 MySQL 에 테이블이 생성이 된다.
 public class Board {
 
