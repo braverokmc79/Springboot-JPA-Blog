@@ -4,6 +4,7 @@ import com.cos.blog.constant.RoleType;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -21,6 +22,7 @@ import java.util.function.Supplier;
 public class DummyControllerTest {
 
     private final UserRepository userRepository;
+
 
     //save 함수는 id를 전달하지 않으면 insert 를 해주고
     //save 함수는 id를 전달하면 id 에 대한 데이터가 있으면 update 를 해주고
@@ -41,7 +43,17 @@ public class DummyControllerTest {
         //
         //@Transactional
         //영속화된 user 객체의 데이터 감지, 이것을 더티체킹, 더티체킹후 함수 종료시에 자동 commit
-        return  null;
+        return  user;
+    }
+
+    @DeleteMapping(value = "/dummy/user/{id}")
+    public String delete(@PathVariable("id") Long id){
+        try{
+            userRepository.deleteById(id);
+        }catch(EmptyResultDataAccessException e){
+            return "삭제에 실패하였습니다. 해당  id는 DB 에 없습니다.";
+        }
+        return "삭제 되었습니다." +id;
     }
 
 
