@@ -9,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Data
@@ -32,10 +33,43 @@ public class Board {
     @ColumnDefault("0")
     private int count;//조회수
 
-
-    @ManyToOne //Many=Many, User=One
+    /**
+     * Member와 Team 사이가 다대일 @ManyToOne 관계로 매핑되어 있는 상황에서,*
+     * @ManyToOne 어노테이션에 fetch 타입을 줄 수 있다.*
+     * FetchType.LAZY
+     * 무에서는 가급적 지연 로딩만 사용하다. 즉시 로딩 쓰지 말자.
+     *
+     * JPA 구현체도 한번에 가저오려고 하고, 한번에 가져와서 쓰면 좋지 않나?
+     * 즉시 로딩을 적용하면 예상하지 못한 SQL이 발생한다.
+     *
+     *즉시 로딩(Eager Loading)과 지연 로딩(Lazy Loading)
+     * '즉시 로딩'은 불필요한 조인까지 포함해서 처리하는 경우가 많기 때문에 '지연 로딩'의 사용을 권장하고 있습니다.
+     *
+     * 각 연관관계의 default 속성은 다음과 같습니다.*
+     * @OneToMany: LAZY
+     * @ManyToOne: EAGER
+     * @ManyToMany: LAZY
+     * @OneToOne: EAGER
+    ⌨️ 즉시 로딩(Eager Loading)과 지연 로딩(Lazy Loading)의 주의할 점
+    가급적이면 지연 로딩(Lazy Loading)만 사용(특히 실무에서)
+    즉시 로딩(Eager Loading)을 적용하면 예상하지 못한 SQL이 발생할 수 있음
+    즉시 로딩(Earge Loading)은 JPQL에서 N+1 문제를 일으킴
+     *
+     */
+    @ManyToOne(fetch = FetchType.EAGER) //Many=Many, User=One
     @JoinColumn(name="userId")
     private User user; //DB 는 오브젝트를 저장활 수 없다. FK, 자바는 오브젝트를 저장할 수 있다.1
+
+
+    //mappedBy 연관관계의 주인이 아니다 난 FK 가 아니에요. DB에 컬럼을 만들지 마세요.
+    /**
+     *     @ManyToOne
+     *     @JoinColumn(name = "boardId")
+     *     private Board board;
+     *     mappedBy 에는 board 를 적는다.
+     */
+    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER) //하나의 게시판에 여러개의 댓글이 존재 , 따라서 oneToMany 의 기본전략은 LAZY 이다.
+    private List<Reply> reply;
 
 
     @CreationTimestamp
