@@ -8,12 +8,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -23,6 +21,28 @@ import java.util.function.Supplier;
 public class DummyControllerTest {
 
     private final UserRepository userRepository;
+
+    //save 함수는 id를 전달하지 않으면 insert 를 해주고
+    //save 함수는 id를 전달하면 id 에 대한 데이터가 있으면 update 를 해주고
+    //save 함수는 id를 전달하면 해당 id 에 대한 데이터가 없으면 insert 를 한다.
+    //email, password
+    @Transactional
+    @PostMapping(value = "/dummy/user/{id}")
+    public User updateUser(@PathVariable("id") Long id , @RequestBody User requestUser){
+        //@RequestBody json 데이터를 요청 =>Java Object(MessageConverter  의 Jackson 라이브러리가 반환해서 받아줌)
+        System.out.println("id : " +id);
+        System.out.println("User  : " +requestUser.toString());
+
+        User user =userRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        user.setPassword(requestUser.getPassword());
+        user.setEmail(requestUser.getEmail());
+
+        //userRepository.save(user);
+        //더티 체킹
+        return  null;
+    }
+
+
 
     @GetMapping(value = "/dummy/users")
     public List<User> list(){
@@ -37,6 +57,7 @@ public class DummyControllerTest {
       List<User> users= pagingUser.getContent();
       return users;
     }
+
 
 
 
