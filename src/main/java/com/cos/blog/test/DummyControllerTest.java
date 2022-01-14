@@ -4,12 +4,17 @@ import com.cos.blog.constant.RoleType;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 import java.util.function.Supplier;
 
 //html 파일아니라 data 를 리턴하는 controller
@@ -17,8 +22,23 @@ import java.util.function.Supplier;
 @RequiredArgsConstructor
 public class DummyControllerTest {
 
-
     private final UserRepository userRepository;
+
+    @GetMapping(value = "/dummy/users")
+    public List<User> list(){
+        return userRepository.findAll();
+    }
+
+    //http://localhost:8000/blog/dummy/user/page/
+    @GetMapping("/dummy/user")
+    public List<User> pageList(@PageableDefault(size = 1, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
+      Page<User> pagingUser= userRepository.findAll(pageable);
+
+      List<User> users= pagingUser.getContent();
+      return users;
+    }
+
+
 
     //http://localhost:8000/blog/dummy/join (요청)
     @PostMapping("/dummy/join")
