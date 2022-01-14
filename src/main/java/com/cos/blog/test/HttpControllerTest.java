@@ -9,10 +9,24 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class HttpControllerTest {
 
+    private static final String TAG="HttpControllerTest :";
+
+    @GetMapping("/http/lombok")
+    private String lombokTest(){
+        Member m=Member.builder().username("ssr").password("111").email("sss@gmail.com").build();
+        System.out.println(TAG+"getter : " +m.getId());
+        m.setId(5000);
+        System.out.println(TAG+"setter : " +m.getId());
+        System.out.println(TAG + ": " +m.getUsername());
+        return "lombok  test 완료";
+    }
+
+
     //http://localhost:8080/http/get
     @GetMapping(value = "/http/get")
-    public String getTest(){
-        return "get 요청";
+    public String getTest(Member m){
+        System.out.println(m.getEmail());
+        return "get 1 요청";
     }
 
     //http://localhost:8080/http/post
@@ -31,8 +45,6 @@ public class HttpControllerTest {
     //http://localhost:8080/http/delete
     @DeleteMapping(value = "/http/delete")
     public String deleteTest(){
-
-
         return "delete 요청";
     }
 
