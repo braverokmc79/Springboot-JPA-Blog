@@ -1,10 +1,7 @@
 package com.cos.blog.model;
 
 import com.cos.blog.constant.Role;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -14,6 +11,7 @@ import java.time.LocalDateTime;
 
 
 @Data
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder //빌더패턴
@@ -35,13 +33,14 @@ public class User {
     private String email; //이메일
 
     @Enumerated(EnumType.STRING)
-    @ColumnDefault("'user'")
+   // @ColumnDefault("'USER'")
     private Role role;// Enum을 쓰는게 좋다.
 
     @CreationTimestamp //시간이 자동 입력
     private LocalDateTime createDate; //등록일
 
     //private Timestamp createDate;
+
 
 
 

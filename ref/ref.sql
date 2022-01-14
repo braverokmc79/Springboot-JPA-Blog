@@ -1,6 +1,7 @@
-create user `ateama`@`localhost` identified by '12341234';
-create database ateama CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
-grant all privileges on ateama.* to `ateama`@`localhost` ;
+drop database springbootblog;
+create user `springbootblog`@`localhost` identified by '1234';
+create database springbootblog CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+grant all privileges on springbootblog.* to `springbootblog`@`localhost` ;
 
 
 -- 슈퍼 권한

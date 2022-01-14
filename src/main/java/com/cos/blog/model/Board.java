@@ -68,6 +68,8 @@ public class Board {
      *     private Board board;
      *     mappedBy 에는 board 를 적는다.
      */
+    //Column으로 쓰지않는 변수에 대한 선언. @Transient
+    //@Transient
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER) //하나의 게시판에 여러개의 댓글이 존재 , 따라서 oneToMany 의 기본전략은 LAZY 이다.
     private List<Reply> reply;
 
