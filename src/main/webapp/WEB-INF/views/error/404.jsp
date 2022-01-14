@@ -19,7 +19,7 @@
 
         .ag-page-404 {
             padding: 100px 0 0;
-            background: url(${HOME}/images/toaster-bg.png) no-repeat 50% 100%;
+            background: url(https://cdn.jsdelivr.net/gh/braverokmc79/Springboot-JPA-Blog@1.0.0/src/main/resources/static/images/smoke.png) no-repeat 50% 100%;
         }
 
         .ag-canvas-404_img {
@@ -63,7 +63,7 @@
         .ag-toaster_shadow {
             width: 165px;
             height: 9px;
-            background: url(${HOME}/images/sprite-toaster.png) -340px -195px no-repeat;
+            background: url(https://cdn.jsdelivr.net/gh/braverokmc79/Springboot-JPA-Blog@1.0.0/src/main/resources/static/images/sprite-toaster.png) -340px -195px no-repeat;
 
             position: absolute;
             left: 0;
@@ -72,7 +72,7 @@
         .ag-toaster_toast {
             width: 159px;
             height: 171px;
-            background: url(${HOME}/images/sprite-toaster.png) -340px 0 no-repeat;
+            background: url(https://cdn.jsdelivr.net/gh/braverokmc79/Springboot-JPA-Blog@1.0.0/src/main/resources/static/images/sprite-toaster.png) -340px 0 no-repeat;
 
             z-index: -1;
             position: relative;
@@ -80,7 +80,7 @@
         .ag-toaster_front {
             width: 340px;
             height: 217px;
-            background: url(${HOME}/images/sprite-toaster.png) 0 -18px no-repeat;
+            background: url(https://cdn.jsdelivr.net/gh/braverokmc79/Springboot-JPA-Blog@1.0.0/src/main/resources/static/images/sprite-toaster.png) 0 -18px no-repeat;
 
             z-index: 2;
             position: relative;
@@ -88,7 +88,7 @@
         .ag-toaster_lever {
             width: 22px;
             height: 21px;
-            background: url(${HOME}/images/sprite-toaster.png) -340px -171px no-repeat;
+            background: url(https://cdn.jsdelivr.net/gh/braverokmc79/Springboot-JPA-Blog@1.0.0/src/main/resources/static/images/sprite-toaster.png) -340px -171px no-repeat;
 
             position: absolute;
             top: 75px;
@@ -97,7 +97,7 @@
         .ag-toaster_back {
             width: 340px;
             height: 18px;
-            background: url(${HOME}/images/sprite-toaster.png) no-repeat;
+            background: url(https://cdn.jsdelivr.net/gh/braverokmc79/Springboot-JPA-Blog@1.0.0/src/main/resources/static/images/sprite-toaster.png) no-repeat;
 
             z-index: -3;
             position: relative;
@@ -343,7 +343,7 @@
         </div>
 
         <canvas id="canvas-404" class="ag-canvas-404"></canvas>
-        <img class="ag-canvas-404_img" src="${HOME}/images/smoke.png">
+        <img class="ag-canvas-404_img" src="https://cdn.jsdelivr.net/gh/braverokmc79/Springboot-JPA-Blog@1.0.0/src/main/resources/static/images/smoke.png">
 
 
     </div>
