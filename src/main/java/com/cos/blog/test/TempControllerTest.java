@@ -21,7 +21,7 @@ public class TempControllerTest {
 //
 // 파일 html  리턴기본경로: src/main/resources/templates
 
-        return "home.html";
+        return "index.html";
     }
 
 
