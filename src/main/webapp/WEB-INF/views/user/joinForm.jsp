@@ -4,27 +4,29 @@
 
 <div class="container">
 
-	<form action="/action_page.php">
+	<form action="">
 		<div class="form-group">
 			<label for="username">Username</label> <input type="text" class="form-control" placeholder="Enter username" id="username" name="username">
-		</div>
-
-		<div class="form-group">
-			<label for="email">Email</label> <input type="email" class="form-control" placeholder="Enter email" id="email" name="email">
 		</div>
 
 		<div class="form-group">
 			<label for="password">Password</label> <input type="password" class="form-control" placeholder="Enter password" id="password" name="password">
 		</div>
 
-		<button type="submit" class="btn btn-primary">회원가입완료</button>
+		<div class="form-group">
+			<label for="email">Email</label> <input type="email" class="form-control" placeholder="Enter email" id="email" name="email">
+		</div>
+
+
+		<button type="button" id="btn-save" class="btn btn-primary">회원가입완료</button>
 	</form>
-	
-	
+
+
 </div>
 
 
 
+<script src="${pageContext.request.contextPath}/js/user.js"></script>
 
 <%@ include file="../layout/footer.jsp"%>
 

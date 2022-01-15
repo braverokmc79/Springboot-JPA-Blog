@@ -4,7 +4,7 @@
 
 <div class="container">
 
-	<form action="/action_page.php">
+	<form action="">
 		<div class="form-group">
 			<label for="username">Username</label> <input type="text" class="form-control" placeholder="Enter username" id="username" name="username">
 		</div>
@@ -16,7 +16,7 @@
 			<label class="form-check-label"> <input class="form-check-input" type="checkbox"> Remember me
 			</label>
 		</div>
-		<button type="submit" class="btn btn-primary">로그인</button>
+		<button type="button"  id="btn-save" class="btn btn-primary">로그인</button>
 	</form>
 	
 	

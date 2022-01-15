@@ -21,14 +21,17 @@
                 <label for="password">Password</label> <input type="password" class="form-control" placeholder="Enter password" id="password" name="password">
             </div>
 
-            <button type="submit" class="btn btn-primary">회원가입완료</button>
+            <button type="button" id="btn-save" class="btn btn-primary">회원가입완료1</button>
         </form>
 
 
     </div>
 
-
-
 </div>
+
+
+<th:block layout:fragment="script">
+<script th:src="@{/js/user.js}"></script>
+</th:block>
 
 </html>
