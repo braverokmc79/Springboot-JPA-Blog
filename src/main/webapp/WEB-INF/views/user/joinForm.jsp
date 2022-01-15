@@ -26,8 +26,8 @@
 
 
 
-<script src="${pageContext.request.contextPath}/js/user.js"></script>
 
 <%@ include file="../layout/footer.jsp"%>
 
+<script src="${pageContext.request.contextPath}/js/user.js"></script>
 
