@@ -1,24 +1,27 @@
 package com.cos.blog.handler;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.persistence.EntityNotFoundException;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 
 
-@ControllerAdvice
-@Controller
+//@ControllerAdvice
+//@Controller
 public class GlobalExceptionHandler  implements ErrorController {
 
         private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -36,6 +39,8 @@ public class GlobalExceptionHandler  implements ErrorController {
 
             // 에러 코드에 대한 상태 정보
             HttpStatus httpStatus = HttpStatus.valueOf(Integer.valueOf(status.toString()));
+
+            System.out.println("에러 코드에 대한 상태 정보 :" +httpStatus);
 
             if (status != null) {
                 // HttpStatus와 비교해 페이지 분기를 나누기 위한 변수
@@ -63,6 +68,9 @@ public class GlobalExceptionHandler  implements ErrorController {
             // 정의한 에러 외 모든 에러는 error/error 페이지로 보낸다.
             return ERROR_ETC_PAGE_PATH;
         }
+        
+        
+
 
 
 

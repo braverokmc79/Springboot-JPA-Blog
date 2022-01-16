@@ -10,7 +10,7 @@ let user ={
 	save:function(){
 		const $home=$("#home").val();
 		let data={
-			id:$("#username").val(),
+			username:$("#username").val(),
 			password:$("#password").val(),
 			email:$("#email").val()
 		};
