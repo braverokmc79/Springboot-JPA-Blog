@@ -29,5 +29,11 @@ public class UserService {
         return result;
     }
 
+    //readOnly = true  : 효과적으로 읽기 전용이므로 런타임 시 해당 최적화가 가능
+    @Transactional(readOnly = true)
+	public User login(User user) {
+		return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+	}
+
 
 }

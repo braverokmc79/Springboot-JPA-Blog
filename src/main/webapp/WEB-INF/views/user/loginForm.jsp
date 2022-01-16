@@ -4,7 +4,7 @@
 
 <div class="container">
 
-	<form action="">
+	<form action="${pageContext.request.contextPath}/">
 		<div class="form-group">
 			<label for="username">Username</label> <input type="text" class="form-control" placeholder="Enter username" id="username" name="username">
 		</div>
@@ -16,7 +16,7 @@
 			<label class="form-check-label"> <input class="form-check-input" type="checkbox"> Remember me
 			</label>
 		</div>
-		<button type="button"  id="btn-save" class="btn btn-primary">로그인</button>
+		<button type="button"  id="btn-login" class="btn btn-primary">로그인</button>
 	</form>
 	
 	
@@ -25,6 +25,7 @@
 
 
 
+<script src="${pageContext.request.contextPath}/js/user.js"></script>
 <%@ include file="../layout/footer.jsp"%>
 
 
