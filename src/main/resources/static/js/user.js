@@ -1,16 +1,17 @@
 let user ={
 	
 	init:function(){
-		$("#btn-save").on("click",()=>{ //function()P{, ()=>{} this를 바인딩하기 위해서,  function을 사용시에는 this 아니라  변수 user 를 사용. user.save()		
+		$("#btn-save").on("click",()=>{
+			//function()P{, ()=>{} this를 바인딩하기 위해서,
+			// function을 사용시에는 this 아니라  변수 user 를 사용 예) user.save()
 			this.save();
 		});
 	},
 
-
 	save:function(){
 		const $home=$("#home").val();
 		let data={
-			username:$("#username").val(),
+			id:$("#username").val(),
 			password:$("#password").val(),
 			email:$("#email").val()
 		};
@@ -31,11 +32,11 @@ let user ={
 			console.log(res, status);
 			alert("회원가입이 완료 되었습니다.");
 			//location.href=$home;
-		}).fail(function(errorRes){
-			console.log("errorRes");
-			console.log(errorRes);
-			console.log("status :" +errorRes.status);			
-			alert(JSON.stringify(errorRes));
+		}).fail(function(res, status, error){
+			console.log(res, status, error);
+			console.log("res.responseText :" +res.responseText);
+			console.log(JSON.stringify(res));
+			alert(res.responseText);
 		});
 
 
@@ -48,19 +49,15 @@ let user ={
 		// 	,success:function(result, status){
 		// 		//console.log(result, status);
 		// 	},
-		// 	error:function(errorRes){
-		// 			console.log("errorRes");
-		// 			console.log(errorRes);
-		// 			console.log("status :" +errorRes.status);			
-		// 			alert(JSON.stringify(errorRes));
+		// 	error:function(res, status, error){
+		// console.log(res, status, error);
+		// console.log("data :" +res.responseText);
+		// console.log(JSON.stringify(res));
+		// alert(res.responseText);
 		// 	}			
 		// });
 	  
-		//error : function(jqXHR, status, error){
 
 	}
-
 }
-
-
 user.init();
