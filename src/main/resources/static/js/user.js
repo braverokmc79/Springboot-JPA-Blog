@@ -36,7 +36,7 @@ let user ={
 		}).done(function(res, status){
 			console.log(res, status);
 			alert("회원가입이 완료 되었습니다.");
-			location.href=$home+"user/loginForm";
+			location.href=$home+"loginForm";
 		}).fail(function(res, status, error){
 			console.log(res, status, error);
 			console.log("res.responseText :" +res.responseText);

@@ -13,13 +13,13 @@
 
 
                <th:block  th:if="${session.principal == null}">
-                    <li class="nav-item"><a class="nav-link" th:href="@{/user/loginForm}">로그인</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/user/joinForm}">회원가입</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/loginForm}">로그인</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/joinForm}">회원가입</a></li>
                </th:block>
                 <th:block th:unless="${session.principal == null}">
-                    <li class="nav-item"><a class="nav-link" th:href="@{/board/writeForm}">글쓰기</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/user/userForm}">회원정보</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/user/logout}">로그아웃</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/form}">글쓰기</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/form}">회원정보</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/logout}">로그아웃</a></li>
                 </th:block>
 
             </ul>

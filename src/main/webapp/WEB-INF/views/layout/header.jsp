@@ -23,15 +23,15 @@
 			<c:choose>
 				<c:when test="${empty sessionScope.principal }">
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/loginForm">로그인</a></li>
-						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/joinForm">회원가입</a></li>
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/loginForm">로그인</a></li>
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/joinForm">회원가입</a></li>
 					</ul>
 				</c:when>
 				<c:otherwise>
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/board/writeForm">글쓰기</a></li>
-						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/userForm">회원정보</a></li>
-						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/board/form">글쓰기</a></li>
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/form">회원정보</a></li>
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
 					</ul>
 				</c:otherwise>
 			</c:choose>

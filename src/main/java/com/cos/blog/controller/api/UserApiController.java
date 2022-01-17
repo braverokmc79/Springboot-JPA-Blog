@@ -1,7 +1,5 @@
 package com.cos.blog.controller.api;
 
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -33,7 +31,7 @@ public class UserApiController {
         return new ResponseEntity<Integer>(1, HttpStatus.OK);
     }
     
-    
+/*    
     @PostMapping("/api/user/login")
     public ResponseEntity<?> login(@RequestBody User user, HttpSession session) {
     	log.info("UserApiController  : login 호출 됨");
@@ -48,7 +46,8 @@ public class UserApiController {
         }
         
     }
-
+*/
+    
     
     
     
