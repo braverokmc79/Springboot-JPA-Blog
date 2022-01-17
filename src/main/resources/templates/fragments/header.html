@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <div th:fragment="header">
     <input type="hidden" id="home" th:value="@{/}" >
@@ -12,6 +13,8 @@
             <ul class="navbar-nav">
 
 
+<!--
+                일반적인 세션 로그인 처리일 경우 다음과 같이 처리
                <th:block  th:if="${session.principal == null}">
                     <li class="nav-item"><a class="nav-link" th:href="@{/loginForm}">로그인</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/joinForm}">회원가입</a></li>
@@ -21,6 +24,23 @@
                     <li class="nav-item"><a class="nav-link" th:href="@{/form}">회원정보</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/logout}">로그아웃</a></li>
                 </th:block>
+-->
+
+
+
+                <th:block  sec:authorize="isAnonymous()">
+                    <li class="nav-item"><a class="nav-link" th:href="@{/auth/loginForm}">로그인</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/auth/joinForm}">회원가입</a></li>
+                </th:block>
+                <th:block  sec:authorize="isAuthenticated()">
+                    <li class="nav-item"><a class="nav-link" th:href="@{/form}">글쓰기</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/form}">회원정보</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/logout}">로그아웃</a></li>
+                </th:block>
+
+
+
+
 
             </ul>
         </div>

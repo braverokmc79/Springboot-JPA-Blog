@@ -19,12 +19,7 @@
 	</properties>
 	<dependencies>
 
-		<!-- 시큐리티 태그 라이브러리 -->
 
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-taglibs</artifactId>
-		</dependency>
 
 
 		<!-- JSP 템플릿 엔진 -->
@@ -40,13 +35,29 @@
 		</dependency>
 
 
-<!--     
-    <dependency>
+		<!--   thymeleaf 라이브러리 시작
+		 현재 프로젝트에서 spring-boot-starter-thymeleaf 라이브러리 하나만 주석처리하면
+		 jsp 를 사용할 수 있다.
+		 -->
+		<!--   
+       <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
+        </dependency> 
+        -->
 
- -->
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+<!-- 			<version>3.0.4.RELEASE</version> -->
+		</dependency>
+		<dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+<!-- 			<version>3.0.0</version> -->
+		</dependency>
+		<!--   thymeleaf 라이브러리 끝  -->
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -104,17 +115,25 @@
 		</dependency>
 
 
-		<dependency>
-			<groupId>nz.net.ultraq.thymeleaf</groupId>
-			<artifactId>thymeleaf-layout-dialect</artifactId>
-			<version>3.0.0</version>
-		</dependency>
 
+		<!-- 시큐리티 라이브러리 시작 -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<version>5.6.0</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- 시큐리티 라이브러리 끝 -->
 
 
 		<dependency>
@@ -123,19 +142,6 @@
 		</dependency>
 
 
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<version>5.6.0</version>
-			<scope>test</scope>
-		</dependency>
-
-
-		<dependency>
-			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
-			<version>3.0.4.RELEASE</version>
-		</dependency>
 
 
 		<dependency>
@@ -150,6 +156,7 @@
 			<artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
 			<version>1.16</version>
 		</dependency>
+
 
 
 	</dependencies>

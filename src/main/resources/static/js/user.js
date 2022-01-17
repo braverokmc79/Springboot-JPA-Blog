@@ -29,7 +29,7 @@ let user ={
 
 		$.ajax({
 			type:"POST",
-			url:$home+"api/user",
+			url:$home+"auth/joinProc",
 			data:JSON.stringify(data),	//JSON 문자열로 변환 - http body 데이터
 			contentType:"application/json; charset=urf-8", // body 데이터가 어떤 타입인지(MIME)
 			dataType:"json"	 //요청을 서버로해서 응담이 왔을 때 기본적으로 모든 것이 문자열(생긴것이 json이라면 ) => javascript

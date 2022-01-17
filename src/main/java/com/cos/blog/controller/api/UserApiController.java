@@ -23,7 +23,7 @@ public class UserApiController {
 			
     private final UserService userService;
 
-    @PostMapping("/api/user")
+    @PostMapping("/auth/joinProc")
     public ResponseEntity<?> save(@RequestBody User user) {
         //실제로 DB에 insert 를 하고 아래에서 리턴
         user.setRole(RoleType.USER);
