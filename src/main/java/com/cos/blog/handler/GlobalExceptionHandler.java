@@ -25,9 +25,9 @@ public class GlobalExceptionHandler implements ErrorController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // 에러 페이지 정의
-    private final String ERROR_404_PAGE_PATH = "/error/404";
-    private final String ERROR_500_PAGE_PATH = "/error/500";
-    private final String ERROR_ETC_PAGE_PATH = "/error/error";
+    private final String ERROR_404_PAGE_PATH = "error/404";
+    private final String ERROR_500_PAGE_PATH = "error/500";
+    private final String ERROR_ETC_PAGE_PATH = "error/error";
 
 
     //Json type 형태의 예외처리 와 CustomException 을 설정한것 이곳에서  처리된다.

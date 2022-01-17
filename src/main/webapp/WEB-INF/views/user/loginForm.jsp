@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../layout/header.jsp"%>
 
 <div class="container">
 
-	<form action="${pageContext.request.contextPath}/" method="post">
+	<form action="${pageContext.request.contextPath}/auth/loginProc" method="post">
 		<div class="form-group">
 			<label for="username">Username</label> <input type="text" class="form-control" placeholder="Enter username" id="username" name="username">
 		</div>
@@ -16,7 +16,11 @@
 			<label class="form-check-label"> <input class="form-check-input" type="checkbox" name="remember"> Remember me
 			</label>
 		</div>
-		<button type="button"  id="btn-login" class="btn btn-primary">로그인</button>
+		  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		
+		 <p style="color: red;">${loginErrorMsg}</p>
+		
+		<button type="submit"  id="btn-login" class="btn btn-primary">로그인</button>
 	</form>
 	
 	

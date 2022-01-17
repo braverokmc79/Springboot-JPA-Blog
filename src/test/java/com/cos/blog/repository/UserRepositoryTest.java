@@ -264,4 +264,16 @@ public class UserRepositoryTest implements UserRepository {
 		return null;
 	}
 
+	@Override
+	public Optional<User> findByUsername(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

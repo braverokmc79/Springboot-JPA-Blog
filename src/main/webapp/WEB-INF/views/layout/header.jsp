@@ -6,17 +6,16 @@
   <sec:authentication property="principal" var="principal"/>
 </sec:authorize>
 
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <title>Jsp Blog</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/> 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
 </head>
 <body>
 	<input type="hidden" id="home" value="${pageContext.request.contextPath}/">
@@ -38,14 +37,11 @@
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/board/form">글쓰기</a></li>
 						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/form">회원정보</a></li>
-						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/auth/logout">로그아웃</a></li>
 					</ul>
 				</c:otherwise>
 			</c:choose>
-
-
-
 		</div>
 	</nav>
-	<br />
+<br />
 	

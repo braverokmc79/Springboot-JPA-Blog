@@ -37,11 +37,11 @@
 
 		<!-- thymeleaf 라이브러리 시작 현재 프로젝트에서 spring-boot-starter-thymeleaf 라이브러리 하나만 
 			주석처리하면 jsp 를 사용할 수 있다. -->
-		 <dependency>
+<!-- 		 <dependency>
 			 <groupId>org.springframework.boot</groupId> 
 			 <artifactId>spring-boot-starter-thymeleaf</artifactId> 
 		</dependency>
-
+ -->
 
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
