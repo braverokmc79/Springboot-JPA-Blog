@@ -4,7 +4,7 @@
 
 <div class="container">
 
-	<form action="">
+	<form action="${pageContext.request.contextPath}/auth/joinProc" method="post">
 		<div class="form-group">
 			<label for="username">Username</label> <input type="text" class="form-control" placeholder="Enter username" id="username" name="username">
 		</div>
@@ -18,7 +18,7 @@
 		</div>
 
 
-		<button type="button" id="btn-save" class="btn btn-primary">회원가입완료</button>
+		<button type="submit" id="btn-save" class="btn btn-primary">회원가입완료</button>
 	</form>
 
 

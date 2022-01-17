@@ -1,5 +1,7 @@
 package com.cos.blog.controller.api;
 
+import java.sql.SQLException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -8,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cos.blog.constant.RoleType;
 import com.cos.blog.model.User;
 import com.cos.blog.service.UserService;
 
@@ -23,12 +24,20 @@ public class UserApiController {
 			
     private final UserService userService;
 
+   
+    
     @PostMapping("/auth/joinProc")
     public ResponseEntity<?> save(@RequestBody User user) {
         //실제로 DB에 insert 를 하고 아래에서 리턴
-        user.setRole(RoleType.USER);
-        userService.userJoin(user);
-        return new ResponseEntity<Integer>(1, HttpStatus.OK);
+    	log.info("회원 가입");
+
+        try{
+        	 userService.userJoin(user);
+             return new ResponseEntity<Integer>(1, HttpStatus.OK);
+        }catch (RuntimeException e){
+            return new ResponseEntity<String>("이미등록된 아이디 입니다.", HttpStatus.BAD_REQUEST);
+        }
+       
     }
     
 /*    

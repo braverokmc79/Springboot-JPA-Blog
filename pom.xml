@@ -35,28 +35,23 @@
 		</dependency>
 
 
-		<!--   thymeleaf 라이브러리 시작
-		 현재 프로젝트에서 spring-boot-starter-thymeleaf 라이브러리 하나만 주석처리하면
-		 jsp 를 사용할 수 있다.
-		 -->
-		<!--   
-       <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency> 
-        -->
+		<!-- thymeleaf 라이브러리 시작 현재 프로젝트에서 spring-boot-starter-thymeleaf 라이브러리 하나만 
+			주석처리하면 jsp 를 사용할 수 있다. -->
+		 <dependency>
+			 <groupId>org.springframework.boot</groupId> 
+			 <artifactId>spring-boot-starter-thymeleaf</artifactId> 
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
-<!-- 			<version>3.0.4.RELEASE</version> -->
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>		
 		</dependency>
 		<dependency>
 			<groupId>nz.net.ultraq.thymeleaf</groupId>
 			<artifactId>thymeleaf-layout-dialect</artifactId>
-<!-- 			<version>3.0.0</version> -->
 		</dependency>
-		<!--   thymeleaf 라이브러리 끝  -->
+		<!-- thymeleaf 라이브러리 끝 -->
 
 
 		<dependency>
@@ -156,7 +151,19 @@
 			<artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
 			<version>1.16</version>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
 
+
+		<!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher -->
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-launcher</artifactId>
+			<version>1.8.2</version>
+			<scope>test</scope>
+		</dependency>
 
 
 	</dependencies>

@@ -1,8 +1,10 @@
 package com.cos.blog.service;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cos.blog.constant.RoleType;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.UserRepository;
 
@@ -25,9 +27,13 @@ public class UserService {
     
 	private final UserRepository userRepository;
 
-    
+    private final BCryptPasswordEncoder passwordEncoder;
+	
     //회원가입
     public User userJoin(User user) {
+    	String rawPassword =user.getPassword(); //1234
+    	user.setPassword(passwordEncoder.encode(rawPassword));    	
+        user.setRole(RoleType.USER);
         User result=userRepository.save(user);      
         return result;
     }
