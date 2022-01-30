@@ -1,13 +1,13 @@
 package com.cos.blog.service;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cos.blog.constant.RoleType;
 import com.cos.blog.model.Board;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.BoardRepository;
@@ -47,5 +47,10 @@ public class BoardService {
     	return result;
     }
 
+	public List<Board> boardList() {		
+		return boardRepository.findAll();	
+	}
+
+	
 
 }
