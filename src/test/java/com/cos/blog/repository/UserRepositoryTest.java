@@ -276,4 +276,10 @@ public class UserRepositoryTest implements UserRepository {
 		return null;
 	}
 
+	@Override
+	public User getByUsername(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

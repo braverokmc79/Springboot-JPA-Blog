@@ -54,23 +54,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.mvcMatchers("/", "/auth/**", "/js/**", "/css/**", "/images/**")
 			.permitAll()
 			.anyRequest().authenticated();  //위설정한 경로를 제외한 나머지 경로들은 모든 인증을 요구하도록 설정		
-	
-//			.and()
-//			.formLogin()
-//			.loginPage("/auth/loginForm")
-//			.loginProcessingUrl("/auth/loginProc") //스프링 시큐리티가 해당 주소로 요청오는  로그인을 가로채서 대신 로그인 해준다.
-//			.defaultSuccessUrl("/");
-//		
-//			일반적으로 mvcMatcher는 antMatcher보다 안전합니다. 예로서:
-//			antMatchers("/secured")는 정확한 /secured URL 과만 일치
-//			mvcMatchers("/secured")는 /secured, /secured/, /secured.html와 일치합니다.
-
-
-
-        
-		
-	  http
-	  	  //.csrf().disable() 
+			
+	  http	 
 	  	  .formLogin()	  
           .loginPage("/auth/loginForm")  //로그인 페이지 URL 을 설정         
           .loginProcessingUrl("/auth/loginProc") //스프링 시큐리티가 해당 주소로 요청오는  로그인을 가로채서 대신 로그인 해준다. 적지 않으면 .loginPage("/auth/loginForm") 값이 기본값 처리          
@@ -81,8 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
           .and()
           .logout()
           .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))  // 임의로그아웃 URL 을 설정하면당 스프링시큐리티가 해당 url 로 로그아웃 처리 . 기본 값은 logout
-          .logoutSuccessUrl("/"); //로그아웃 성공시 이동할 URL 을 설정
-		
+          .logoutSuccessUrl("/"); //로그아웃 성공시 이동할 URL 을 설정		
 	}
 	
 	
@@ -94,8 +78,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     public void configure(WebSecurity web) throws Exception {
       web.ignoring().antMatchers("/css/**", "/js/**", "/img/**");
     }
-
-    
-	
 	
 }

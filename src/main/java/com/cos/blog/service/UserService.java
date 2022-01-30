@@ -1,5 +1,7 @@
 package com.cos.blog.service;
 
+import java.sql.SQLException;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,13 +32,17 @@ public class UserService {
     private final BCryptPasswordEncoder passwordEncoder;
 	
     //회원가입
-    public User userJoin(User user) {
+    public User userJoin(User user){
     	String rawPassword =user.getPassword(); //1234
     	user.setPassword(passwordEncoder.encode(rawPassword));    	
         user.setRole(RoleType.USER);
         User result=userRepository.save(user);      
         return result;
     }
+
+	public User getByUsername(String name) {
+		return userRepository.getByUsername(name);				
+	}
 
     //readOnly = true  : 효과적으로 읽기 전용이므로 런타임 시 해당 최적화가 가능
 /*

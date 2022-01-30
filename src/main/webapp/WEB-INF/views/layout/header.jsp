@@ -16,6 +16,9 @@
 <meta name="_csrf_header" content="${_csrf.headerName}"/> 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+    
 </head>
 <body>
 	<input type="hidden" id="home" value="${pageContext.request.contextPath}/">
@@ -35,8 +38,8 @@
 				</c:when>
 				<c:otherwise>
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/board/form">글쓰기</a></li>
-						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/form">회원정보</a></li>
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/board/saveForm">글쓰기</a></li>
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/updateForm">회원정보</a></li>
 						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/auth/logout">로그아웃</a></li>
 					</ul>
 				</c:otherwise>

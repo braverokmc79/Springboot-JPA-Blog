@@ -33,12 +33,10 @@
                     <li class="nav-item"><a class="nav-link" th:href="@{/auth/joinForm}">회원가입</a></li>
                 </th:block>
                 <th:block  sec:authorize="isAuthenticated()">
-                    <li class="nav-item"><a class="nav-link" th:href="@{/form}">글쓰기</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/form}">회원정보</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/board/saveForm}">글쓰기</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/board/updateForm}">회원정보</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/auth/logout}">로그아웃</a></li>
                 </th:block>
-
-
 
 
 

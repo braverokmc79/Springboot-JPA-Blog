@@ -1,8 +1,11 @@
 package com.cos.blog.model;
 
 import com.cos.blog.constant.RoleType;
+
+import ch.qos.logback.classic.db.names.ColumnName;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -28,7 +31,7 @@ public class User {
     @Column(nullable = false, length = 100) //123456 => 해쉬 (비밀번호 암호화)
     private String password; // 비밀번호
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 50, unique = true)
     private String email; //이메일
 
 
