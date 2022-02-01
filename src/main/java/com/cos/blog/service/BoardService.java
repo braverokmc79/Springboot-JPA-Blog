@@ -2,6 +2,8 @@ package com.cos.blog.service;
 
 import java.security.Principal;
 
+import javax.persistence.EntityExistsException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -53,6 +55,13 @@ public class BoardService {
     @Transactional(readOnly = true)
 	public Page<BoardDto> boardSearchList(SearchCond  searchCond , Pageable pageable) {    	
 		return boardRepository.boardSearchList(searchCond ,pageable);
+	}
+
+    
+    
+    //글 상세보기
+	public Board boardDetail(Long id) {		
+		return boardRepository.findById(id).orElseThrow(EntityExistsException::new);		
 	}
     
     

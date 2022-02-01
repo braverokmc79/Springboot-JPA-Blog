@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
+      layout:decorate="~{layouts/layout1}">
+
+<div layout:fragment="content">
+
+
+    <div class="container">
+				<button type="button"  class="btn btn-secondary"  onclick="history.back()">돌아가기</button>
+				<button id="btn-update"	class="btn btn-warning">수정</button>
+				<button id="btn-delete"	class="btn btn-danger">삭제</button>
+				<br><br>
+	
+     	
+			<div class="form-group">
+		 		[[${board.title}]]			
+			</div>
+	
+			<hr>
+			<div class="form-group">		 		
+		 		<th:block  th:utext="${board.content}"></th:block>					
+			</div>
+			<hr>
+		
+    </div>
+
+
+</div>
+
+
+<th:block layout:fragment="script">
+<script th:src="@{/js/board.js}"></script>
+    <script>
+      $('.summernote').summernote({
+        placeholder: '내용을 입력해 주세요.',
+        tabsize: 3,
+        height: 300,
+      });
+    </script>
+
+</th:block>
+
+</html>
