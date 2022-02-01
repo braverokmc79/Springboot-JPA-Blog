@@ -9,7 +9,6 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import com.cos.blog.model.Board;
 
 
-public interface BoardRepository extends JpaRepository<Board, Long> , QuerydslPredicateExecutor<Item> , BoardRepositoryCustom{
-	 
+public interface BoardRepository extends JpaRepository<Board, Long> , QuerydslPredicateExecutor<Item> , BoardRepositoryCustom{	 
 }
 

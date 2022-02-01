@@ -53,8 +53,6 @@ public class BoardService {
     @Transactional(readOnly = true)
 	public Page<BoardDto> boardSearchList(SearchCond  searchCond , Pageable pageable) {    	
 		return boardRepository.boardSearchList(searchCond ,pageable);
-    	
-    	//return boardRepository.findAll(pageable);
 	}
     
     

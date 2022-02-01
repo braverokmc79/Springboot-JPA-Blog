@@ -37,18 +37,18 @@
 	첫번째 페이지 : [[${boards.first}]] <br> [[${pagination.listCnt}]] 개 <br> [[${pagination}]] <br> 현재 페이지 :[[${pagination.curPage}]]
 	<ul class="pagination justify-content-center" th:if="${pagination.listCnt>0}">
 		<th:block th:if="${not boards.first}">
-			<li class="page-item" ><a class="page-link" th:href="${searchCond.getBoardsLink()} +'&page=1'">≪</a></li>
-			<li class="page-item" ><a class="page-link" th:href="${searchCond.getBoardsLink()}+'&page='+${pagination.prevPage}">&lt;</a></li>
+			<li class="page-item" ><a class="page-link" th:href="@{${searchCond.getBoardsLink()} +'&page=1'}">≪</a></li>
+			<li class="page-item" ><a class="page-link" th:href="@{${searchCond.getBoardsLink()}+'&page='+${pagination.prevPage}}">&lt;</a></li>
 		</th:block>
 		
 		<li class="page-item" th:each="page : ${ #numbers.sequence(pagination.startPage, pagination.endPage)  }" 
 			th:classappend="${page eq pagination.curPage} ? 'active':'' ">
-		<a class="page-link" th:href="${searchCond.getBoardsLink()}+'&page=' +${page}">[[${page}]]</a>
+		<a class="page-link" th:href="@{${searchCond.getBoardsLink()}+'&page=' +${page}}">[[${page}]]</a>
 		</li>
 
 		<th:block th:if="${not boards.last}">
-			<li class="page-item"><a class="page-link" th:href="${searchCond.getBoardsLink()}+'&page=' + ${pagination.nextPage}">&gt;</a></li>
-			<li class="page-item"><a class="page-link" th:href="${searchCond.getBoardsLink()}+'&page=' + ${boards.totalPages}">≫</a></li>
+			<li class="page-item"><a class="page-link" th:href="@{${searchCond.getBoardsLink()}+'&page=' + ${pagination.nextPage}}">&gt;</a></li>
+			<li class="page-item"><a class="page-link" th:href="@{${searchCond.getBoardsLink()}+'&page=' + ${boards.totalPages}}">≫</a></li>
 		</th:block>
 	</ul>
 
