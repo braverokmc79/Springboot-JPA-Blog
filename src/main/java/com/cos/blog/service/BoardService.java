@@ -1,14 +1,17 @@
 package com.cos.blog.service;
 
 import java.security.Principal;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cos.blog.dto.BoardDto;
 import com.cos.blog.model.Board;
+import com.cos.blog.model.SearchCond;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.BoardRepository;
 
@@ -47,9 +50,14 @@ public class BoardService {
     	return result;
     }
 
-	public List<Board> boardList() {		
-		return boardRepository.findAll();	
+    @Transactional(readOnly = true)
+	public Page<BoardDto> boardSearchList(SearchCond  searchCond , Pageable pageable) {    	
+		return boardRepository.boardSearchList(searchCond ,pageable);
+    	
+    	//return boardRepository.findAll(pageable);
 	}
+    
+    
 
 	
 

@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.querydsl.core.annotations.QueryProjection;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -56,7 +58,7 @@ public class Board {
     즉시 로딩(Earge Loading)은 JPQL에서 N+1 문제를 일으킴
      *
      */
-    @ManyToOne(fetch = FetchType.EAGER) //Many=Many, User=One
+    @ManyToOne(fetch = FetchType.LAZY) //Many=Many, User=One
     @JoinColumn(name="userId")
     private User user; //DB 는 오브젝트를 저장활 수 없다. FK, 자바는 오브젝트를 저장할 수 있다.1
 
@@ -70,7 +72,7 @@ public class Board {
      */
     //Column으로 쓰지않는 변수에 대한 선언. @Transient
     //@Transient
-    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER) //하나의 게시판에 여러개의 댓글이 존재 , 따라서 oneToMany 의 기본전략은 LAZY 이다.
+    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY) //하나의 게시판에 여러개의 댓글이 존재 , 따라서 oneToMany 의 기본전략은 LAZY 이다.
     private List<Reply> reply;
 
 
@@ -78,8 +80,7 @@ public class Board {
     private LocalDateTime createDate; //등록일
 
 
-
-
+     
 
 
 }

@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 			//.csrf().disable()  //csrf 토큰 비활성화(테스트시 걸어두는 것이 좋다)
 			.authorizeRequests() //시큐리티 처리에 HttpServletRequest 를 이용한다는 것을 의미			
-			.mvcMatchers("/", "/auth/**", "/js/**", "/css/**", "/images/**")
+			.mvcMatchers("/", "/auth/**", "/js/**", "/css/**", "/images/**" , "/dummy/**")
 			.permitAll()
 			.anyRequest().authenticated();  //위설정한 경로를 제외한 나머지 경로들은 모든 인증을 요구하도록 설정		
 			

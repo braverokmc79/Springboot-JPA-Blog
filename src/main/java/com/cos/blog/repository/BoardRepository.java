@@ -1,14 +1,15 @@
 package com.cos.blog.repository;
 
-import java.util.Optional;
-
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 import com.cos.blog.model.Board;
-import com.cos.blog.model.User;
 
 
-public interface BoardRepository extends JpaRepository<Board, Long> {
-		
+public interface BoardRepository extends JpaRepository<Board, Long> , QuerydslPredicateExecutor<Item> , BoardRepositoryCustom{
+	 
 }
 

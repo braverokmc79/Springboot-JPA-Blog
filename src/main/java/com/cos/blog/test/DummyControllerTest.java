@@ -1,20 +1,31 @@
 package com.cos.blog.test;
 
-import com.cos.blog.constant.RoleType;
-import com.cos.blog.model.User;
-import com.cos.blog.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
+import java.security.Principal;
+import java.util.List;
+
+import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
+
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
-import java.util.List;
-import java.util.function.Supplier;
+import com.cos.blog.constant.RoleType;
+import com.cos.blog.model.Board;
+import com.cos.blog.model.User;
+import com.cos.blog.repository.UserRepository;
+import com.cos.blog.service.BoardService;
+
+import lombok.RequiredArgsConstructor;
 
 //html 파일아니라 data 를 리턴하는 controller
 @RestController
@@ -23,6 +34,9 @@ public class DummyControllerTest {
 
     private final UserRepository userRepository;
 
+	
+	
+	private final BoardService boardService;
 
     //save 함수는 id를 전달하지 않으면 insert 를 해주고
     //save 함수는 id를 전달하면 id 에 대한 데이터가 있으면 update 를 해주고
@@ -65,12 +79,24 @@ public class DummyControllerTest {
 
     //http://localhost:8000/blog/dummy/user/page/
     @GetMapping("/dummy/user")
-    public List<User> pageList(@PageableDefault(size = 1, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
-      Page<User> pagingUser= userRepository.findAll(pageable);
+    public Page<User> pageList(@PageableDefault(size = 1, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
+    Page<User> pagingUser= userRepository.findAll(pageable);
 
       List<User> users= pagingUser.getContent();
-      return users;
+      return pagingUser;
     }
+
+//    @GetMapping("/dummy/boards")
+//    public  Page<Board> boards(Model model,   Principal principal,
+//    		@PageableDefault(size=3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable    		
+//    		) {	//컨트롤에서 세션을 어떻게 찾는지? 
+//    	
+//    	if(principal!=null) {    		
+//    		System.out.println("로그인 사용자 아이디 : " +principal.getName());
+//    	}
+//    	
+//    	return boardService.boardList(pageable);
+//    }
 
 
 
