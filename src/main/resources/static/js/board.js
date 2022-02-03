@@ -4,6 +4,15 @@ let board ={
 		$("#btn-save").on("click",()=>{
 			this.save();
 		});
+		
+		$("#btn-update").on("click",()=>{
+			this.update();
+		});
+		
+		$("#btn-delete").on("click",()=>{
+			this.deleteById();
+		});
+		
 
 	},
 
@@ -44,54 +53,87 @@ let board ={
 			alert(res.responseText);
 		});
 
-	  
 
 	},
 	
 	
 
-	login:function(){
-		const $home=$("#home").val();		
+	deleteById:function(){
+		
+		if(confirm("정말 삭제 하시겠습니까?")){
+				const id=$("#id").text();
+				const $home=$("#home").val();
+				const token = $("meta[name='_csrf']").attr("content");
+				const header = $("meta[name='_csrf_header']").attr("content");
+		
+				$.ajax({
+					type:"DELETE",
+					beforeSend:function(xhr){
+						xhr.setRequestHeader(header,token);
+					},
+					url:$home+"api/board/"+id,				
+					dataType:"json"	
+				}).done(function(res, status){
+					console.log(res, status);
+					alert("글이 삭제 되었습니다.");
+					location.href="/";
+					
+					
+				}).fail(function(res, status, error){
+					console.log(res, status, error);
+					console.log("res.responseText :" +res.responseText);
+					console.log(JSON.stringify(res));
+					alert(res.responseText);
+				});
+		}
+
+
+	},
+	
+		
+	
+	
+	update:function(){
+		const $home=$("#home").val();
 		const token = $("meta[name='_csrf']").attr("content");
 		const header = $("meta[name='_csrf_header']").attr("content");
-		
+
 		let data={
-			username:$("#username").val(),
-			password:$("#password").val(),
+			title:$("#title").val(),
+			content:$("#content").val(),
 		};
 
 		console.log(data);
-	
+		console.log("$home : " +$home);
+
+
 		$.ajax({
 			type:"POST",
 			beforeSend:function(xhr){
 				xhr.setRequestHeader(header,token);
 			},
-			url:$home+"auth/loginProc",
-			//data:JSON.stringify(data),	//JSON 문자열로 변환 - http body 데이터
-			data:data,	//JSON 문자열로 변환 - http body 데이터
-			//contentType:"application/json; charset=urf-8", // body 데이터가 어떤 타입인지(MIME)
-			//dataType:"json"	 //요청을 서버로해서 응담이 왔을 때 기본적으로 모든 것이 문자열(생긴것이 json이라면 ) => javascript
+			url:$home+"api/board",
+			data:JSON.stringify(data),
+			contentType:"application/json; charset=urf-8", 
+			dataType:"json"	
 		}).done(function(res, status){
-			console.log("done");
-			console.log(status);
-			console.log(res);
-			if(status=="success"){
-				alert(res);
-				//location.href=$home;
-			}			
+			console.log(res, status);
+			//alert("글쓰기가 완료 되었습니다.");
+			location.href="/";
+			
+			
 		}).fail(function(res, status, error){
-			console.log("fail");
 			console.log(res, status, error);
+			console.log("res.responseText :" +res.responseText);
 			console.log(JSON.stringify(res));
-			if(res.responseText=="2"){
-				alert("아이디 또는 비밀번호가 일치 하지 않습니다.");
-			}else{
-				alert(res.responseText);
-			}			
+			alert(res.responseText);
 		});
 
-	}
+	},
+	
+	
+	
+	
 
 }
 

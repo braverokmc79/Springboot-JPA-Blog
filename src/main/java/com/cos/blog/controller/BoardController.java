@@ -1,11 +1,13 @@
 package com.cos.blog.controller;
 
+import java.security.Principal;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cos.blog.dto.BoardDto;
 import com.cos.blog.model.SearchCond;
+import com.cos.blog.model.User;
 import com.cos.blog.service.BoardService;
 import com.cos.blog.util.Pagination;
 @Controller
@@ -46,13 +49,15 @@ public class BoardController {
     }
     
     
+    
     @GetMapping("/board/{id}")
-    public String findById(@PathVariable Long id, Model model) {    	
+    public String findById(@PathVariable Long id,  Principal principal,  Model model) {
+    	model.addAttribute("auth", principal);
     	model.addAttribute("board", boardService.boardDetail(id));
     	return "board/detail";
     }
     
-    
+
     
     @GetMapping("/board/saveForm")
     public String saveForm() {

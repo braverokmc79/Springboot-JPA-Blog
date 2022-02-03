@@ -1,19 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
-      layout:decorate="~{layouts/layout1}">
+      layout:decorate="~{layouts/layout1}"      
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <div layout:fragment="content">
 
 
     <div class="container">
 				<button type="button"  class="btn btn-secondary"  onclick="history.back()">돌아가기</button>
+			
+		<!-- 	     인증시 사용된 객체에 대한 정보
+		        <b>Authenticated DTO:</b>
+		        <div sec:authentication="principal"></div>
+		
+		        인증시 사용된 객체의 Username (ID)
+		        <b>Authenticated username:</b>
+		        <div sec:authentication="name"></div>
+		
+		        객체의 권한te
+		        <b>Authenticated user role:</b>
+		        <div sec:authentication="principal.authorities"></div>
+		         -->
+
+			<th:block  th:if="${board.user.username ==auth.principal.Username}">
 				<button id="btn-update"	class="btn btn-warning">수정</button>
 				<button id="btn-delete"	class="btn btn-danger">삭제</button>
+			</th:block>	
 				<br><br>
 	
+			<div class="mb-5">
+			글번호 : <span id="id" class="mr-5"><i>[[${board.id}]]</i></span>
+			작성자 : <span><i>[[${board.user.username}]]</i></span>
+			</div>
+		
      	
-			<div class="form-group">
+			<div class="form-group mb-5">
 		 		[[${board.title}]]			
 			</div>
 	

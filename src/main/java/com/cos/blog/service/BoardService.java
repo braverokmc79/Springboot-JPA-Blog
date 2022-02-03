@@ -60,8 +60,14 @@ public class BoardService {
     
     
     //글 상세보기
+    @Transactional(readOnly = true)
 	public Board boardDetail(Long id) {		
 		return boardRepository.findById(id).orElseThrow(EntityExistsException::new);		
+	}
+
+	
+	public void deleteByid(Long id) {
+		boardRepository.deleteById(id);		
 	}
     
     

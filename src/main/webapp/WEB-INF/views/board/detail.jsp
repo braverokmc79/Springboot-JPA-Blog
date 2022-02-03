@@ -5,11 +5,22 @@
 <div class="container">
 		
 		<button type="button"  class="btn btn-secondary"  onclick="history.back()">돌아가기</button>
-		<button id="btn-update"	class="btn btn-warning">수정</button>
-		<button id="btn-delete"	class="btn btn-danger">삭제</button>
+
+		<c:if test="${board.user.username eq principal.username }">
+			<button id="btn-update"	class="btn btn-warning">수정</button>
+			<button id="btn-delete"	class="btn btn-danger">삭제</button>		
+		</c:if>
+	
+	
 		<br><br>
 	
-		<div class="form-group">
+		
+		<div class="mb-5">
+			글번호 : <span id="id" class="mr-5"><i>${board.id}</i></span>
+			작성자 : <span><i>${board.user.username}</i></span>
+		</div>
+	
+		<div class="form-group mb-5">
 			<h3>${board.title }</h3>
 		</div>
 
