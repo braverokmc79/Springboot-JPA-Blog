@@ -6,17 +6,18 @@
 
 	<form method="post">
 		<div class="form-group">
-			<input type="text" class="form-control" placeholder="제목" id="title" name="title">
+			<input type="text" class="form-control" placeholder="제목" id="title" name="title" value="${board.title}">
 		</div>
 
-		<div class="form-group"> 		
-			<textarea rows="5" cols=""   id="content" name="content" class="form-control summernote"></textarea>
+		<div class="form-group">	
+			<textarea rows="5" cols=""   id="content" name="content" class="form-control summernote">${board.content}</textarea>
 		</div>
 		
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		<p style="color: red;">${loginErrorMsg}</p>
 
-		<button type="button" id="btn-save" class="btn btn-primary">글쓰기 완료</button>
+		<input type="hidden" name="id" id="id" value="${board.id}">
+		<button type="button" id="btn-update" class="btn btn-primary">글수정 완료</button>
 	</form>
 
 </div>

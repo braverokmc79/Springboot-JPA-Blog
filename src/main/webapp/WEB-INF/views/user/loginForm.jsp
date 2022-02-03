@@ -4,7 +4,7 @@
 
 <div class="container">
 
-	<form action="${pageContext.request.contextPath}/auth/loginProc" method="post">
+	<form action="${Home}/auth/loginProc" method="post">
 		<div class="form-group">
 			<label for="username">Username</label> <input type="text" class="form-control" placeholder="Enter username" id="username" name="username">
 		</div>
@@ -30,7 +30,7 @@
 
 
 <%-- 
-<script src="${pageContext.request.contextPath}/js/user.js"></script>
+<script src="${Home}/js/user.js"></script>
  --%>
 <%@ include file="../layout/footer.jsp"%>
 

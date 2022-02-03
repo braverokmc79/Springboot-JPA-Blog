@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<c:set value="${pageContext.request.contextPath}"  var="Home"  />
 
 <sec:authorize access="isAuthenticated()">
   <sec:authentication property="principal" var="principal"/>
@@ -21,9 +22,9 @@
     
 </head>
 <body>
-	<input type="hidden" id="home" value="${pageContext.request.contextPath}/">
+	<input type="hidden" id="home" value="${Home}/">
 	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-		<a class="navbar-brand" href="${pageContext.request.contextPath}/">Jsp Blog</a>
+		<a class="navbar-brand" href="${Home}/">Jsp Blog</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -32,15 +33,15 @@
 			<c:choose>
 				<c:when test="${empty principal }">
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/auth/loginForm">로그인</a></li>
-						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/auth/joinForm">회원가입</a></li>
+						<li class="nav-item"><a class="nav-link" href="${Home}/auth/loginForm">로그인</a></li>
+						<li class="nav-item"><a class="nav-link" href="${Home}/auth/joinForm">회원가입</a></li>
 					</ul>
 				</c:when>
 				<c:otherwise>
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/board/saveForm">글쓰기</a></li>
-						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/user/updateForm">회원정보</a></li>
-						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/auth/logout">로그아웃</a></li>
+						<li class="nav-item"><a class="nav-link" href="${Home}/board/saveForm">글쓰기</a></li>
+						<li class="nav-item"><a class="nav-link" href="${Home}/user/updateForm">회원정보</a></li>
+						<li class="nav-item"><a class="nav-link" href="${Home}/auth/logout">로그아웃</a></li>
 					</ul>
 				</c:otherwise>
 			</c:choose>

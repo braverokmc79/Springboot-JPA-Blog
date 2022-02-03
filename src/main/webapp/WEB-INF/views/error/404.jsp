@@ -350,7 +350,7 @@
 </div>
 
 <div style="text-align: center;">
-    <button class="mybutton" onclick="location.href='${pageContext.request.contextPath}'">Home</button>
+    <button class="mybutton" onclick="location.href='${Home}'">Home</button>
 </div>
 <script>
     (function ($) {

@@ -14,7 +14,7 @@ let user ={
 
 
 	save:function(){
-		const $home=$("#home").val();
+		const $Home=$("#home").val();
 		const token = $("meta[name='_csrf']").attr("content");
 		const header = $("meta[name='_csrf_header']").attr("content");
 
@@ -25,7 +25,7 @@ let user ={
 		};
 
 		console.log(data);
-		console.log("$home : " +$home);
+		console.log("$Home : " +$Home);
 		//ajax 호출시 default가 비동기 호출
 		//ajax 통신을 이용해서 3개의 데이터를 json 으로 변경하여 insert 요청!
         //application/json 통신시 반환되는 dataType 은 json
@@ -35,14 +35,14 @@ let user ={
 			beforeSend:function(xhr){
 				xhr.setRequestHeader(header,token);
 			},
-			url:$home+"auth/joinProc",
+			url:$Home+"auth/joinProc",
 			data:JSON.stringify(data),	//JSON 문자열로 변환 - http body 데이터
 			contentType:"application/json; charset=urf-8", // body 데이터가 어떤 타입인지(MIME)
 			dataType:"json"	 //요청을 서버로해서 응담이 왔을 때 기본적으로 모든 것이 문자열(생긴것이 json이라면 ) => javascript
 		}).done(function(res, status){
 			console.log(res, status);
 			alert("회원가입이 완료 되었습니다.");
-			location.href=$home+"auth/loginForm";
+			location.href=$Home+"auth/loginForm";
 		}).fail(function(res, status, error){
 			console.log(res, status, error);
 			console.log("res.responseText :" +res.responseText);
@@ -53,7 +53,7 @@ let user ={
 
 		// $.ajax({
 		// 	type:"POST",
-		// 	url:$home+"/api/user",
+		// 	url:$Home+"api/user",
 		// 	data:JSON.stringify(data),	//JSON 문자열로 변환 - http body 데이터
 		// 	contentType:"application/json; charset=urf-8", // body 데이터가 어떤 타입인지(MIME)
 		// 	dataType:"json"	 //요청을 서버로해서 응담이 왔을 때 기본적으로 모든 것이 문자열(생긴것이 json이라면 ) => javascript
@@ -72,7 +72,7 @@ let user ={
 	},
 
 	login:function(){
-		const $home=$("#home").val();		
+		const $Home=$("#home").val();		
 		const token = $("meta[name='_csrf']").attr("content");
 		const header = $("meta[name='_csrf_header']").attr("content");
 		
@@ -88,7 +88,7 @@ let user ={
 			beforeSend:function(xhr){
 				xhr.setRequestHeader(header,token);
 			},
-			url:$home+"auth/loginProc",
+			url:$Home+"auth/loginProc",
 			//data:JSON.stringify(data),	//JSON 문자열로 변환 - http body 데이터
 			data:data,	//JSON 문자열로 변환 - http body 데이터
 			//contentType:"application/json; charset=urf-8", // body 데이터가 어떤 타입인지(MIME)
@@ -99,7 +99,7 @@ let user ={
 			console.log(res);
 			if(status=="success"){
 				alert(res);
-				//location.href=$home;
+				//location.href=$Home;
 			}			
 		}).fail(function(res, status, error){
 			console.log("fail");

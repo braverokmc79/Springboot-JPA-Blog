@@ -40,8 +40,8 @@ if [ -z "$MAVEN_SKIP_RC" ] ; then
     . /etc/mavenrc
   fi
 
-  if [ -f "$HOME/.mavenrc" ] ; then
-    . "$HOME/.mavenrc"
+  if [ -f "$Home/.mavenrc" ] ; then
+    . "$Home/.mavenrc"
   fi
 
 fi
