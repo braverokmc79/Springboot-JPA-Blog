@@ -3,6 +3,8 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <div th:fragment="header">
+
+
     <input type="hidden" id="home" th:value="@{/}" >
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
         <a class="navbar-brand"  th:href="@{/}">Thymeleaf Blog</a>
@@ -34,7 +36,7 @@
                 </th:block>
                 <th:block  sec:authorize="isAuthenticated()">
                     <li class="nav-item"><a class="nav-link" th:href="@{/board/saveForm}">글쓰기</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/board/updateForm}">회원정보</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/user/updateForm}">회원정보</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/auth/logout}">로그아웃</a></li>
                 </th:block>
 

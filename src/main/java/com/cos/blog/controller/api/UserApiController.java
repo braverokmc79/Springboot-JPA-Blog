@@ -1,11 +1,24 @@
 package com.cos.blog.controller.api;
 
+import java.security.Principal;
+
+import javax.servlet.http.HttpSession;
+
+import org.apache.catalina.authenticator.SpnegoAuthenticator.AuthenticateAction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,6 +52,37 @@ public class UserApiController {
         
         return new ResponseEntity<Integer>(1, HttpStatus.OK);                
     }
+    
+    
+    
+    @PutMapping("/auth/user")
+    public ResponseEntity<Integer> updateUser(@RequestBody User user){  
+        userService.updateUser(user);    
+        //여기서는 트랜잭션이 종료되기 때문에 DB에 값은 변경이 됐음.
+        //하지만 세션값은 변경되지 않은 상태이기 때문에 우리가 직접 세션값을 변경해 줄 것임.
+        
+        //서비스에서 트랜잭션 완료후(즉DB 변경후) 컨트롤에서 실행해야 시큐리티 세션이 변경된다.
+        Authentication authentication= new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
+    	SecurityContextHolder.getContext().setAuthentication(authentication);    	
+    	
+    	
+    	//버전업으로 다음 처럼 세션을 직접 접근해서 변경은 안된다.
+    	//session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);       
+    	return new ResponseEntity<Integer>(1, HttpStatus.OK);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 /*    

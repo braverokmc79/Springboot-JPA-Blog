@@ -1,9 +1,12 @@
 package com.cos.blog.controller;
 
+import java.security.Principal;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.cos.blog.model.User;
 import com.cos.blog.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -39,6 +42,19 @@ public class UserController {
         model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해 주세요.");
         return "user/loginForm";
     }
+    
+    
+    @GetMapping("/user/updateForm")
+    public String updateUserForm(Principal principal,  Model model) {
+    	User userInfo =userService.getByUsername(principal.getName());
+    	model.addAttribute("userInfo" ,userInfo);    	
+    	return "user/updateUserForm";
+    }
+    
+    
+    
+    
+    
     
     
     

@@ -3,6 +3,7 @@ package com.cos.blog.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -30,7 +31,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	}
 	
 	
-    /**
+	@Bean
+    @Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
+
+
+
+	/**
     *
     * Spring Secureity 에서 인증은 AuthenticationManager 를 통해 이루어지며
     * AuthenticationManagerBuilder 가 AuthenticationManager 를 생성합니다.

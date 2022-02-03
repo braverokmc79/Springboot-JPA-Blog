@@ -2,6 +2,8 @@ package com.cos.blog.service;
 
 import java.sql.SQLException;
 
+import javax.persistence.EntityExistsException;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,6 +45,24 @@ public class UserService {
 	public User getByUsername(String name) {
 		return userRepository.getByUsername(name);				
 	}
+
+	public void updateUser(User requestUser) {
+		//수정시에는 영속성 컨텍스트 User 오브젝트를 영속화시키고, 영속화된 User 오브젝트를 수정
+		//select 를 해서 User 오브젝트를 DB로 부터 가져오는 이유는 영속화를 하기 위해서!
+		//영속화된 오브젝트를 변경하면 자동으로 DB에 update 문 잘려준다.		
+		User persistanceUser =userRepository.findById(requestUser.getId()).orElseThrow(EntityExistsException::new);
+		//User persistanceUser =userRepository.getByUsername(requestUser.getUsername());
+		//getByUsername 를 해도 업데이트 처리 된다. 즉 User 객체만 변경되면 업데이트 처리된다.
+		
+		String rawPassword=requestUser.getPassword();
+	    String encPassword=passwordEncoder.encode(rawPassword);
+	    persistanceUser.setPassword(encPassword);
+	    persistanceUser.setEmail(requestUser.getEmail());
+		//회원 수정 함수 종료시 ==서비스 종료 == 트랜잭션 종료 = commit 이 자동으로 된다.
+	    //영속화된 pseristance 객체의 변화가 감지되면 더티체킹이 되어 updatge 문을 날려줌.
+	}
+	
+	
 
     //readOnly = true  : 효과적으로 읽기 전용이므로 런타임 시 해당 최적화가 가능
 /*
