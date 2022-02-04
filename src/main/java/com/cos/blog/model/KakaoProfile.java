@@ -4,10 +4,10 @@ import groovy.transform.ToString;
 import lombok.Data;
 //
 //
-//"id": 209833097,
+//"id": 2021983330297,
 //"connected_at": "2021-11-30T09:33:34Z",
 //"properties": {
-//  "nickname": "최준호"
+//  "nickname": "홍길동"
 //},
 //"kakao_account": {
 //  "profile_nickname_needs_agreement": false,
