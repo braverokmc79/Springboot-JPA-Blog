@@ -21,6 +21,10 @@
 		 <p style="color: red;">${loginErrorMsg}</p>
 		
 		<button type="submit"  id="btn-login" class="btn btn-primary">로그인</button>
+		
+		<a href="https://kauth.kakao.com/oauth/authorize?client_id=3e5c0148058f1d1db8f55cea63a6e820&redirect_uri=http://localhost:8000/auth/kakao/callback&response_type=code" >
+			<img src="${Home}/images/kakao_login_button.png" height="38">
+		</a>
 	</form>
 	
 	

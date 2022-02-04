@@ -1,42 +1,52 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout
-      layout:decorate="~{layouts/layout1}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout=http://www.ultraq.net.nz/thymeleaf/layout layout:decorate="~{layouts/layout1}">
 
 <div layout:fragment="content">
 
 
-    <div class="container">
+	<div class="container">
 
-        <form th:action="@{/}" method="post">
-            <div class="form-group">
-                <label for="username">Username</label>
-				<input type="text" class="form-control" th:value="${userInfo.username}"   id="username" name="username"  readonly="readonly">
-            </div>
-            
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control"   placeholder="Enter password" id="password" name="password" required="required">
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" th:value="${userInfo.email}" 	placeholder="Enter email" id="email" name="email" required="required">
-                
-            </div>
-
-			<input type="hidden" name="id" id="id"  th:value="${userInfo.id}" >
-            <button type="button" id="btn-update" class="btn btn-primary">회원수정 완료</button>
-        </form>
+		<form th:action="@{/}" method="post">
+			<div class="form-group">
+				<label for="username">Username</label> <input type="text" class="form-control" th:value="${userInfo.username}" id="username" name="username" readonly="readonly">
+			</div>
 
 
-    </div>
+			<th:block th:if=${userInfo.oauth==null}>
+				<div class="form-group">
+					<label for="password">Password</label> <input type="password" class="form-control" placeholder="Enter password" id="password" name="password" required="required">
+				</div>
+				<div class="form-group">
+					<label for="email">Email</label> <input type="email" class="form-control" th:value="${userInfo.email}" placeholder="Enter email" id="email" name="email" required="required">
+
+				</div>
+				<input type="hidden" name="id" id="id" th:value="${userInfo.id}">
+				<button type="button" id="btn-update" class="btn btn-primary">회원수정 완료</button>
+			</th:block>
+
+
+
+			<th:block th:unless="${userInfo.oauth==null}">
+				<div class="form-group mb-5">
+						<label for="email">Email</label> 
+						<input type="email" class="form-control"  th:value="${userInfo.email}"  id="email" name="email" readonly="readonly">				
+				</div>	
+			
+				<button type="button"  class="btn btn-primary" onclick="history.back()">이전화면</button>
+			</th:block>
+
+		</form>
+
+
+
+
+	</div>
 
 </div>
 
 
 <th:block layout:fragment="script">
-<script th:src="@{/js/user.js}"></script>
+	<script th:src="@{/js/user.js}"></script>
 </th:block>
 
 </html>

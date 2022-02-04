@@ -127,7 +127,13 @@ let user ={
 		const $Home=$("#home").val();
 		const token = $("meta[name='_csrf']").attr("content");
 		const header = $("meta[name='_csrf_header']").attr("content");
-
+		if($("#password")){
+			if($("#password").val()==""){
+				alert("비밀번호를 입력해 주세요.");
+				$("#password").focus();
+				return;
+			}
+		}
 		let data={
 			id:id,
 			username:$("#username").val(),

@@ -1,10 +1,5 @@
 package com.cos.blog.controller.api;
 
-import java.security.Principal;
-
-import javax.servlet.http.HttpSession;
-
-import org.apache.catalina.authenticator.SpnegoAuthenticator.AuthenticateAction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -12,11 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -54,7 +45,7 @@ public class UserApiController {
     }
     
     
-    
+    //회원 수정
     @PutMapping("/auth/user")
     public ResponseEntity<Integer> updateUser(@RequestBody User user){  
         userService.updateUser(user);    
@@ -63,8 +54,7 @@ public class UserApiController {
         
         //서비스에서 트랜잭션 완료후(즉DB 변경후) 컨트롤에서 실행해야 시큐리티 세션이 변경된다.
         Authentication authentication= new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
-    	SecurityContextHolder.getContext().setAuthentication(authentication);    	
-    	
+    	SecurityContextHolder.getContext().setAuthentication(authentication);    	    
     	
     	//버전업으로 다음 처럼 세션을 직접 접근해서 변경은 안된다.
     	//session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);       
