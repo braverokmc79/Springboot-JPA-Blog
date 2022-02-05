@@ -77,7 +77,7 @@ public class Board {
 	//LAZY 사용시    @JsonIgnore 사용
     //Column으로 쓰지않는 변수에 대한 선언. @Transient
     //@Transient
-    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY) //하나의 게시판에 여러개의 댓글이 존재 , 따라서 oneToMany 의 기본전략은 LAZY 이다.
+    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE) //하나의 게시판에 여러개의 댓글이 존재 , 따라서 oneToMany 의 기본전략은 LAZY 이다.
     @JsonIgnore  //@JsonIgnore 애노테이션을 사용함으로써   List<Reply> 객체는 포함하지 않는다.  그러나 replys 호출하는 순간 데이터를 가져오게 된다. 
     //@JsonIgnoreProperties({"board"})  
     @OrderBy("id desc")
