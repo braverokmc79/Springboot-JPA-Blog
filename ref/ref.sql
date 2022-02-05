@@ -58,3 +58,23 @@ show variables like 'c%';
 | concurrent_insert                | AUTO                               |
 | connect_timeout                  | 10                                 |
 | core_file                        | ON                                 |
+
+
+
+
+
+
+
+
+
+
+INSERT INTO reply (content, createDate, boardId, userId) VALUES('1번째 댓글', now(), 1, 6);
+INSERT INTO reply (content, createDate, boardId, userId) VALUES('2번째 댓글', now(), 1, 6);
+INSERT INTO reply (content, createDate, boardId, userId) VALUES('3첫번째 댓글', now(), 1, 6);
+INSERT INTO reply (content, createDate, boardId, userId) VALUES('4첫번째 댓글', now(), 1, 6);
+INSERT INTO reply (content, createDate, boardId, userId) VALUES('5첫번째 댓글', now(), 1, 6);
+INSERT INTO reply (content, createDate, boardId, userId) VALUES('6첫번째 댓글', now(), 1, 6);
+INSERT INTO reply (content, createDate, boardId, userId) VALUES('7첫번째 댓글', now(), 1, 6);
+INSERT INTO reply (content, createDate, boardId, userId) VALUES('8첫번째 댓글', now(), 1, 6);
+INSERT INTO reply (content, createDate, boardId, userId) VALUES('9첫번째 댓글', now(), 1, 6);
+INSERT INTO reply (content, createDate, boardId, userId) VALUES('10번째 댓글', now(), 1, 6);

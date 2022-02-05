@@ -2,6 +2,8 @@ package com.cos.blog.controller;
 
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -11,7 +13,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
@@ -19,6 +23,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 
+import com.cos.blog.config.auth.PrincipalDetailService;
 import com.cos.blog.constant.KakaoRequestCode;
 import com.cos.blog.model.KakaoProfile;
 import com.cos.blog.model.OAuthToken;
@@ -42,6 +47,10 @@ public class UserController {
 
     private final UserService userService;
 
+
+	private final PrincipalDetailService principalDetailService;
+	
+    
     @Value("${cos.key}")
     private String cosKey;
     
@@ -247,15 +256,34 @@ public class UserController {
     	
     	//UsernamePasswordAuthenticationToken 아이디외 비밀번호가 필요하기때문에
     	//카카오 oauth 로그인 비밀번호는  cosKey 값으로 모두 동일하다. 보안 주의 
-        Authentication authentication= new UsernamePasswordAuthenticationToken(user.getUsername(), cosKey);
-    	SecurityContextHolder.getContext().setAuthentication(authentication);    	    
+      //  Authentication authentication= new UsernamePasswordAuthenticationToken(user.getUsername(), cosKey);
+      //SecurityContextHolder.getContext().setAuthentication(authentication);    	    
         
+    	
+    	
+    	sessionReset(user);
+    	
+    	
+    	
     	return "redirect:/";    	
     }
     
     
 
-    
+    /**
+     *  시큐리티 세션 재설정  
+     *  시큐리티 세션 재설정은 서비스에서  트랜잭션이 종료된 후 실행되는  컨트롤에서 설정해야 한다. 
+     */
+    public  void sessionReset(User user) {    	
+        //유저 한명에 권한이 여러개 설정될수 있기 때문에 list 한다. ex)GUEST,USER ,MANAGER,ADMIN  
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(() -> user.getRole().toString());
+       
+		UserDetails  userDetails=principalDetailService.loadUserByUsername(user.getUsername());
+        Authentication newAuthentication = new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
+		SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+    }
+
     
     
     

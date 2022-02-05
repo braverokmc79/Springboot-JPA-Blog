@@ -49,7 +49,7 @@ public class BoardController {
     }
     
     
-    
+    //상세보기
     @GetMapping("/board/{id}")
     public String findById(@PathVariable Long id,  Principal principal,  Model model) {
     	model.addAttribute("auth", principal);

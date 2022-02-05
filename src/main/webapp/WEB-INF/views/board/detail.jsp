@@ -41,20 +41,22 @@
 				</div>	
 		</div>		
 		
-		
+			
 		
 		<div class="card mt-5">
-			<div class="card-header">댓글 리스트</div>
-			<ul id="comment--box" class="list-group">
-			  <li id="comment--1"   class="list-group-item d-flex justify-content-between">
-			  	<div>댓글 내용입니다.</div>
+			<div class="card-header">댓글 리스트  ${board.replys.size() }</div>
+			<ul id="reply--box" class="list-group">
+			
+		<c:forEach items="${board.replys}" var="reply" >
+			  <li id="reply--1"   class="list-group-item d-flex justify-content-between">
+			  	<div>${reply.content}</div>
 			  	<div class="d-flex ">
-			  		<div>작성자 : test</div>
+			  		<div>작성자 : ${reply.user.username}</div>
 			  		<div class="ml-3"><button class="btn btn-danger btn-sm">삭제</button></div>				  		
 			  	</div>			  
 			  </li>
-			  <li class="list-group-item">목록</li>
-			  <li class="list-group-item">목록</li>
+		</c:forEach>
+		
 			</ul>
 		</div>
 
