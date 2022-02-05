@@ -84,6 +84,7 @@ public class BoardService {
 	//댓글 등록
 	public void replySave(ReplySaveRequestDto replySaveRequestDto) {
 
+/*
 		User user =userRepository.findById(replySaveRequestDto.getUserId()).orElseThrow(EntityExistsException::new);
 		Board board =boardRepository.findById(replySaveRequestDto.getBoardId()).orElseThrow(EntityExistsException::new);
 		
@@ -95,6 +96,9 @@ public class BoardService {
 				.build();
 				
 		replyRepository.save(reply);
+*/
+		int result=replyRepository.mSave(replySaveRequestDto.getUserId(), replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
+		log.info("result   :  {}  "   , result);
 	}
 	
 	
