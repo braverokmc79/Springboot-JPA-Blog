@@ -46,16 +46,20 @@
 			<hr>
 		
 		
-		
-		
 		<div class="card">
 				<div class="card-body">
-					<textarea class="form-control" rows="1" cols=""></textarea>
+					<textarea id="reply-content"    class="form-control" rows="1" cols=""></textarea>
 				</div>		
 				<div class="card-footer text-center">
-					<button class="btn btn-primary">등록</button>
+					 <input type="hidden" name="boardId" id="boardId" th:value="${board.id}" >
+					<button id="btn-reply-save" class="btn btn-primary">등록</button>
 				</div>	
-		</div>		
+		</div>
+		<hr>
+		
+		
+		
+
 		
 		
 		

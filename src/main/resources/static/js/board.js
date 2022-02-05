@@ -13,6 +13,10 @@ let board ={
 			this.boardUpdate();
 		});
 
+		$("#btn-reply-save").on("click", ()=>{
+			this.replySave();
+		});
+
 	},
 
 
@@ -130,6 +134,47 @@ let board ={
 
 	},
 	
+	
+	
+	
+	replySave:function(){
+		const $Home=$("#home").val();
+		const token = $("meta[name='_csrf']").attr("content");
+		const header = $("meta[name='_csrf_header']").attr("content");
+		const boardId=$("#boardId").val();
+		
+		let data={
+			content:$("#reply-content").val()
+		};
+
+		console.log(data);
+		console.log("$Home : " +$Home  + " boardId : "+boardId);
+
+	
+		$.ajax({
+			type:"POST",
+			beforeSend:function(xhr){
+				xhr.setRequestHeader(header,token);
+			},
+			url:$Home+`api/board/${boardId}/reply`,
+			data:JSON.stringify(data),
+			contentType:"application/json; charset=urf-8", 
+			dataType:"json"	
+		}).done(function(res, status){
+			console.log(res, status);
+			alert("댓글작성이  완료 되었습니다.");
+			location.href=$Home+`board/${boardId}`;
+			
+			
+		}).fail(function(res, status, error){
+			console.log(res, status, error);
+			console.log("res.responseText :" +res.responseText);
+			console.log(JSON.stringify(res));
+			alert(res.responseText);
+		});
+
+
+	},
 	
 	
 

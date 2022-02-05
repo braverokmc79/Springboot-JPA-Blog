@@ -73,11 +73,14 @@ public class Board {
      *     private Board board;
      *     mappedBy 에는 board 를 적는다.
      */
+	//EAGER 전략일 경우 replys 의 데이터를 같이 가져오나, LAZY 전략일경우  replys 할때 데이터를 가져온다.
+	//LAZY 사용시    @JsonIgnore 사용
     //Column으로 쓰지않는 변수에 대한 선언. @Transient
     //@Transient
     @OneToMany(mappedBy = "board", fetch = FetchType.LAZY) //하나의 게시판에 여러개의 댓글이 존재 , 따라서 oneToMany 의 기본전략은 LAZY 이다.
-    @JsonIgnore
-    //@JsonIgnoreProperties({"board"})
+    @JsonIgnore  //@JsonIgnore 애노테이션을 사용함으로써   List<Reply> 객체는 포함하지 않는다.  그러나 replys 호출하는 순간 데이터를 가져오게 된다. 
+    //@JsonIgnoreProperties({"board"})  
+    @OrderBy("id desc")
     private List<Reply> replys;
 
 

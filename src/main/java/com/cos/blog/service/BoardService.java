@@ -11,11 +11,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cos.blog.config.auth.PrincipalDetails;
 import com.cos.blog.dto.BoardDto;
 import com.cos.blog.model.Board;
+import com.cos.blog.model.Reply;
 import com.cos.blog.model.SearchCond;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.BoardRepository;
+import com.cos.blog.repository.ReplyRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -36,6 +39,9 @@ public class BoardService {
 
 	final private UserService userService;
 
+	private final ReplyRepository  replyRepository;
+	
+	
 	// 글쓰기
 	public int boardSave(Board board, Principal principal) {
 		int result = 0;
@@ -71,6 +77,15 @@ public class BoardService {
 		board.setTitle(requestBoard.getTitle());
 		board.setContent(requestBoard.getContent());
 		//해당 함수로 종료시에 트랜잭션이 service 가 종료될때) 트랜잭션이 종료. 이때 더티체킹 -자동 업데이트가 됨. flush		
+	}
+
+	//댓글 등록
+	public void replySave(User user, Reply requestReply, long boardId) {
+
+		Board board =boardRepository.findById(boardId).orElseThrow(EntityExistsException::new);
+		requestReply.setUser(user);
+		requestReply.setBoard(board);		
+		replyRepository.save(requestReply);
 	}
 	
 	

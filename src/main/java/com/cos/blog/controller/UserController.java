@@ -1,7 +1,6 @@
 package com.cos.blog.controller;
 
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
@@ -14,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
 
 import com.cos.blog.config.auth.PrincipalDetailService;
+import com.cos.blog.config.auth.PrincipalDetails;
 import com.cos.blog.constant.KakaoRequestCode;
 import com.cos.blog.model.KakaoProfile;
 import com.cos.blog.model.OAuthToken;
@@ -75,13 +76,26 @@ public class UserController {
         return "user/loginForm";
     }
     
+//    
+//    @GetMapping("/user/updateForm")
+//    public String updateUserForm(Principal principal,  Model model) {
+//    	User userInfo =userService.getByUsername(principal.getName());
+//    	model.addAttribute("userInfo" ,userInfo);    	
+//    	return "user/updateUserForm";
+//    }
     
+    /**
+     * PrincipalDetails 사용시
+     * @param principal
+     * @param model
+     * @return
+     */
     @GetMapping("/user/updateForm")
-    public String updateUserForm(Principal principal,  Model model) {
-    	User userInfo =userService.getByUsername(principal.getName());
-    	model.addAttribute("userInfo" ,userInfo);    	
+    public String updateUserForm(@AuthenticationPrincipal PrincipalDetails principal,  Model model) {
+    	model.addAttribute("userInfo" ,principal.getUser());    	
     	return "user/updateUserForm";
     }
+    
     
     
     @GetMapping("/auth/kakao/callback")

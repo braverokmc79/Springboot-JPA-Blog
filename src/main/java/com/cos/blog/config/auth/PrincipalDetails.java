@@ -12,11 +12,13 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import com.cos.blog.model.User;
 
+import groovy.transform.ToString;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
+@ToString
 public class PrincipalDetails implements UserDetails, OAuth2User{
 
 	private static final long serialVersionUID = 1L;
@@ -47,7 +49,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User{
 	
 	@Override
 	public String getName() {
-		return user.getUsername();
+		return String.valueOf(user.getId());
 	}
 
 	
@@ -69,13 +71,12 @@ public class PrincipalDetails implements UserDetails, OAuth2User{
 
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
-		return null;
+		return user.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
-		return user.getPassword();
+		return user.getUsername();
 	}
 
 	// 계정 만료(false) 여부
@@ -103,8 +104,6 @@ public class PrincipalDetails implements UserDetails, OAuth2User{
 	public boolean isEnabled() {
 		return true;
 	}
-	
-	
-	
-
 }
+
+
