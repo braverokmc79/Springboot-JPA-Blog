@@ -144,7 +144,8 @@ let board ={
 		const boardId=$("#boardId").val();
 		
 		let data={
-			content:$("#reply-content").val()
+			content:$("#reply-content").val(),
+			boardId:boardId
 		};
 
 		console.log(data);

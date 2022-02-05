@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.blog.config.auth.PrincipalDetails;
+import com.cos.blog.dto.ReplySaveRequestDto;
 import com.cos.blog.model.Board;
 import com.cos.blog.model.Reply;
 import com.cos.blog.model.User;
@@ -55,17 +56,24 @@ public class BoardApiController {
 	}
 
 	
+	//데이터를 받을 때 컨트롤러에서 dto 를 만들어서 받는게 좋다.
+	//dto 사용하지 않는 이유는
 	// 댓글 등록
 	@PostMapping("/api/board/{boardId}/reply")
-	public ResponseEntity<?> replySave(@PathVariable(value = "boardId") long boardId, @RequestBody Reply reply,
+	public ResponseEntity<?> replySave(@PathVariable(value = "boardId") long boardId, @RequestBody ReplySaveRequestDto replySaveRequestDto,
 			@AuthenticationPrincipal PrincipalDetails principal) {
 		try {
-			boardService.replySave(principal.getUser(), reply  ,boardId);
+			replySaveRequestDto.setUserId(principal.getUser().getId());
+			boardService.replySave(replySaveRequestDto);
 			return new ResponseEntity<Integer>(1, HttpStatus.OK);
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			return new ResponseEntity<String>("등록 처리 오류  입니다.", HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	
+	
+	
 
 }

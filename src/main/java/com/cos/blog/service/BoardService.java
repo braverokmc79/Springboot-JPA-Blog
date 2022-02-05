@@ -11,14 +11,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cos.blog.config.auth.PrincipalDetails;
 import com.cos.blog.dto.BoardDto;
+import com.cos.blog.dto.ReplySaveRequestDto;
 import com.cos.blog.model.Board;
 import com.cos.blog.model.Reply;
 import com.cos.blog.model.SearchCond;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.BoardRepository;
 import com.cos.blog.repository.ReplyRepository;
+import com.cos.blog.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -41,6 +42,7 @@ public class BoardService {
 
 	private final ReplyRepository  replyRepository;
 	
+	private final UserRepository userRepository;
 	
 	// 글쓰기
 	public int boardSave(Board board, Principal principal) {
@@ -80,13 +82,21 @@ public class BoardService {
 	}
 
 	//댓글 등록
-	public void replySave(User user, Reply requestReply, long boardId) {
+	public void replySave(ReplySaveRequestDto replySaveRequestDto) {
 
-		Board board =boardRepository.findById(boardId).orElseThrow(EntityExistsException::new);
-		requestReply.setUser(user);
-		requestReply.setBoard(board);		
-		replyRepository.save(requestReply);
+		User user =userRepository.findById(replySaveRequestDto.getUserId()).orElseThrow(EntityExistsException::new);
+		Board board =boardRepository.findById(replySaveRequestDto.getBoardId()).orElseThrow(EntityExistsException::new);
+		
+
+		Reply reply=Reply.builder()
+				.user(user)
+				.board(board)
+				.content(replySaveRequestDto.getContent())
+				.build();
+				
+		replyRepository.save(reply);
 	}
+	
 	
 	
 
