@@ -5,7 +5,8 @@
 <div class="container">
 
 	<form>
-		<div class="form-inline justify-content-center" th:object="${searchCond}">
+		<div class="form-inline justify-content-center mb-5" >
+			<h5 class="mr-3">게시글 총 ${pagination.listCnt}개 </h5>
 			<select class="form-control mr-3"  name="searchType"  >
 				<option value="title"    ${searchCond.searchType eq 'title'  ? 'selected':''} >제목</option>
 				<option value="username" ${searchCond.searchType eq 'username'  ? 'selected':''} >작성자</option>
@@ -38,10 +39,10 @@
 
 
 
-
+<%-- 
 [[${searchCond.getBoardsLink()}]]<br>
-첫번째 페이지 : [[${boards.first}]] <br> [[${pagination.listCnt}]] 개 <br> [[${pagination}]] <br> 현재 페이지 :[[${pagination.curPage}]]
-<ul class="pagination justify-content-center">
+첫번째 페이지 : [[${boards.first}]] <br> [[${pagination.listCnt}]] 개 <br> [[${pagination}]] <br> 현재 페이지 :[[${pagination.curPage}]] --%>
+<ul class="pagination justify-content-center mt-5">
 	   <c:if test="${not boards.first}">
 	  	  <li class="page-item">
 		  	<a class="page-link" href="${searchCond.getBoardsLink()}&page=1">≪</a>

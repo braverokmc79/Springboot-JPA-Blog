@@ -60,10 +60,10 @@
 		
 		
 		<div class="card mt-5">
-			<div class="card-header">댓글 리스트  [[${board.replys.size()}]]</div>
+			<div class="card-header">댓글 총  [[${pagination.listCnt}]] 개</div>
 			<ul id="reply--box" class="list-group">
 			
-		<th:block   th:each ="reply, status : ${board.replys}"  >
+		<th:block   th:each ="reply, status : ${replyList.content}"  >
 			  <li th:id="'reply-'+${reply.id}"   class="list-group-item d-flex justify-content-between">
 			  	<div>[[${reply.content}]]</div>
 			  	<div class="d-flex ">
@@ -81,12 +81,26 @@
 			  	</div>			  
 			  </li>
 			  
-		</th:block>
-		 
-		 	  
-		 	  
+		</th:block>		 	  
 			</ul>
 		</div>
+		
+			<ul class="pagination justify-content-center mt-5" th:if="${pagination.listCnt>0}">
+				<th:block th:if="${not replyList.first}">
+					<li class="page-item" ><a class="page-link" th:href="@{&page=1}">≪</a></li>
+					<li class="page-item" ><a class="page-link" th:href="@{'?page='+${pagination.prevPage}}">&lt;</a></li>
+				</th:block>
+				
+				<li class="page-item" th:each="page : ${ #numbers.sequence(pagination.startPage, pagination.endPage)  }" 
+					th:classappend="${page eq pagination.curPage} ? 'active':'' ">
+				<a class="page-link" th:href="@{'?page=' +${page}}">[[${page}]]</a>
+				</li>
+		
+				<th:block th:if="${not replyList.last}">
+					<li class="page-item"><a class="page-link" th:href="@{'?page=' + ${pagination.nextPage}}">&gt;</a></li>
+					<li class="page-item"><a class="page-link" th:href="@{'?page=' + ${replyList.totalPages}}">≫</a></li>
+				</th:block>
+			</ul>
 
 		
 		

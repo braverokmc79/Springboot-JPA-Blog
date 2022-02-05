@@ -61,10 +61,16 @@
 			
 		
 		<div class="card mt-5">
-			<div class="card-header">댓글 리스트  ${board.replys.size() }</div>
+			<div class="card-header">댓글 총   ${pagination.listCnt} 개</div>
 			<ul id="reply--box" class="list-group">
 			
-		<c:forEach items="${board.replys}" var="reply" >
+			<%-- 
+				다음과 같은 방법으로도 목록이 출력이 되나,
+				그러나 다음과 같은 방법으로 사용하면 댓글 전체를 불러오기 때문에 사용하면 안된다.
+				${board.replys} 
+			
+			--%>
+		<c:forEach items="${replyList.content}" var="reply" >
 			  <li id="reply-${reply.id}"   class="list-group-item d-flex justify-content-between">
 			  	<div>${reply.content}</div>
 			  	<div class="d-flex ">
@@ -80,12 +86,35 @@
 				  		</div>
 			  		</c:if>
 			  						  		
-			  		
 			  	</div>			  
 			  </li>
 		</c:forEach>
 		
 			</ul>
+			
+			<ul class="pagination justify-content-center mt-5">
+				   <c:if test="${not replyList.first}">
+				  	  <li class="page-item">
+					  	<a class="page-link" href="?page=1">≪</a>
+					  </li>
+					  <li class="page-item">
+					  	<a class="page-link" href="?page=${pagination.prevPage}">&lt;</a>
+					  </li>
+				  </c:if>
+				  
+				  <c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" 	var="page" step="1" varStatus="status">
+				  	<li class="page-item ${page eq pagination.curPage  ? 'active' : ''}">
+				  	<a class="page-link" href="?page=${page}">${page}</a>
+				  	</li>
+				  </c:forEach>
+				  
+				  
+				  <c:if test="${not replyList.last}">
+				  	<li class="page-item"><a class="page-link" href="?page=${pagination.nextPage}">&gt;</a></li>  	
+				  	<li class="page-item"><a class="page-link" href="?page=${replyList.totalPages}">≫</a></li>  	
+				  </c:if>  
+				  
+		</ul>
 		</div>
 
 
