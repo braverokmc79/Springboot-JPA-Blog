@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cos.blog.config.auth.PrincipalDetails;
 import com.cos.blog.dto.BoardDto;
 import com.cos.blog.dto.ReplySaveRequestDto;
 import com.cos.blog.model.Board;
@@ -99,6 +100,19 @@ public class BoardService {
 */
 		int result=replyRepository.mSave(replySaveRequestDto.getUserId(), replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
 		log.info("result   :  {}  "   , result);
+	}
+
+	
+	//댓글 삭제
+	public int replyDelete(long replyId, PrincipalDetails principal) {
+	  Reply reply= replyRepository.findById(replyId).orElseThrow(EntityExistsException::new);
+		
+	  if(reply.getUser().getId() ==principal.getUser().getId()) {		  
+		  replyRepository.deleteById(replyId);
+		  return 1;
+	  }
+	  
+	  return 0;		
 	}
 	
 	

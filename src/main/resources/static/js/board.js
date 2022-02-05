@@ -16,7 +16,15 @@ let board ={
 		$("#btn-reply-save").on("click", ()=>{
 			this.replySave();
 		});
-
+		
+		$(".replyDelete").on("click", (e)=>{
+			  if(confirm("정말 삭제 하시겠습니까?")){
+				this.replyDelete($(e.target).data("boardid"),  $(e.target).data("replyid"));
+			  }
+				
+		});
+		
+		
 	},
 
 
@@ -167,6 +175,39 @@ let board ={
 			location.href=$Home+`board/${boardId}`;
 			
 			
+		}).fail(function(res, status, error){
+			console.log(res, status, error);
+			console.log("res.responseText :" +res.responseText);
+			console.log(JSON.stringify(res));
+			alert(res.responseText);
+		});
+
+
+	},
+	
+	
+	
+	
+		
+	replyDelete:function(boardId, replyId){
+		console.log(boardId, replyId);
+		
+		const $Home=$("#home").val();
+		const token = $("meta[name='_csrf']").attr("content");
+		const header = $("meta[name='_csrf_header']").attr("content");
+	
+		$.ajax({
+			type:"DELETE",
+			beforeSend:function(xhr){
+				xhr.setRequestHeader(header,token);
+			},
+			url:$Home+`api/board/${boardId}/reply/${replyId}`,
+			dataType:"json"	
+		}).done(function(res, status){
+			console.log(res, status);
+			alert("댓글 삭제 되었습니다.");
+			location.href=$Home+`board/${boardId}`;
+
 		}).fail(function(res, status, error){
 			console.log(res, status, error);
 			console.log("res.responseText :" +res.responseText);

@@ -38,9 +38,14 @@
 				</div>		
 				<div class="card-footer text-center">
 					 <input type="hidden" name="boardId" id="boardId" value="${board.id}" >
+					
+					
 					<button id="btn-reply-save" class="btn btn-primary">등록</button>
 				</div>	
 		</div>
+	
+	
+
 				
 		<%
 			//EAGER 전략일 경우 replys 의 데이터를 같이 가져오나, LAZY 전략일경우  replys 할때 데이터를 가져온다.
@@ -60,18 +65,28 @@
 			<ul id="reply--box" class="list-group">
 			
 		<c:forEach items="${board.replys}" var="reply" >
-			  <li id="reply--1"   class="list-group-item d-flex justify-content-between">
+			  <li id="reply-${reply.id}"   class="list-group-item d-flex justify-content-between">
 			  	<div>${reply.content}</div>
 			  	<div class="d-flex ">
 			  		<div>작성자 : ${reply.user.username}</div>
-			  		<div class="ml-3"><button class="btn btn-danger btn-sm">삭제</button></div>				  		
+			  		
+			  		
+			  	  	<c:if test="${reply.user.id ==auth.id}">
+			  	  		<div class="ml-3">	
+			  			<button 			  		
+			  			data-boardId='${board.id}'
+				  		data-replyId='${reply.id}'
+				  		class="btn btn-danger btn-sm replyDelete">삭제</button>
+				  		</div>
+			  		</c:if>
+			  						  		
+			  		
 			  	</div>			  
 			  </li>
 		</c:forEach>
 		
 			</ul>
 		</div>
-
 
 
 

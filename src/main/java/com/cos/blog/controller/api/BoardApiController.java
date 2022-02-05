@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.blog.config.auth.PrincipalDetails;
 import com.cos.blog.dto.ReplySaveRequestDto;
+import com.cos.blog.dto.ResponseDto;
 import com.cos.blog.model.Board;
 import com.cos.blog.model.Reply;
 import com.cos.blog.model.User;
@@ -70,6 +71,19 @@ public class BoardApiController {
 			e.printStackTrace();
 			return new ResponseEntity<String>("등록 처리 오류  입니다.", HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+	
+	
+	//댓글 삭제
+	@DeleteMapping("/api/board/{boardId}/reply/{replyId}")
+	public ResponseEntity<?> replyDelete(@PathVariable(value = "boardId") long boardId ,
+			@PathVariable(value = "replyId") long replyId, @AuthenticationPrincipal PrincipalDetails principal){		
+		int result=boardService.replyDelete(replyId , principal);
+		if(result!=1) {
+			return new ResponseEntity<String>("삭제 처리 할수 없습니다.", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<Integer>(1, HttpStatus.OK);
 	}
 	
 	

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cos.blog.config.auth.PrincipalDetails;
 import com.cos.blog.dto.BoardDto;
 import com.cos.blog.model.SearchCond;
 import com.cos.blog.model.User;
@@ -51,8 +52,8 @@ public class BoardController {
     
     //상세보기
     @GetMapping("/board/{id}")
-    public String findById(@PathVariable Long id,  Principal principal,  Model model) {
-    	model.addAttribute("auth", principal);
+    public String findById(@PathVariable Long id,  @AuthenticationPrincipal PrincipalDetails principal,  Model model) {
+    	model.addAttribute("auth", principal.getUser());
     	model.addAttribute("board", boardService.boardDetail(id));
     	return "board/detail";
     }
